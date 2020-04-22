@@ -14,7 +14,7 @@ export 'src/enums.dart';
 
 /// [Platform] info
 /// Works on the web, mobile phones, desktops and console.
-/// Provides platform () information such as:
+/// Provides platform information such as:
 ///   + Build mode
 ///      * release
 ///      * profile
