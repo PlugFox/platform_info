@@ -2,12 +2,13 @@
   
 [![chatroom icon](https://patrolavia.github.io/telegram-badge/chat.png)](https://t.me/PlugFox)
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/plugfox/platform_info/blob/master/LICENSE)
-[![Pub](https://img.shields.io/pub/v/plugfox_transformers.svg)](https://pub.dartlang.org/packages/platform_info)
+[![Pub](https://img.shields.io/pub/v/platform_info.svg)](https://pub.dartlang.org/packages/platform_info)
   
   
 ## About  
   
-Provides platform information such as:  
+Works on the web, mobile phones, desktops and console.  
+Provides platform () information such as:  
   + Build mode  
      * release  
      * profile  

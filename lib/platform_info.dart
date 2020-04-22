@@ -12,7 +12,37 @@ import 'src/stub_host_platform.dart'
 
 export 'src/enums.dart';
 
-/// Platform info
+/// [Platform] info
+/// Works on the web, mobile phones, desktops and console.
+/// Provides platform () information such as:
+///   + Build mode
+///      * release
+///      * profile
+///      * debug
+///
+///   + Host platform type
+///      * io
+///      * web
+///
+///   + Operation system
+///      * Fuchsia
+///      * Linux
+///      * MacOS
+///      * Windows
+///      * iOS
+///      * Android
+///      * Unknown
+///
+///   + Version
+///
+///   + Locale string
+///
+///   + The number of individual execution units of the machine.
+///
+///   + Operating system is known type
+///
+///   + Is mobile device
+///
 class Platform {
   /// Build mode
   ///  + release - Release build mode

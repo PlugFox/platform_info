@@ -2,7 +2,7 @@ name: platform_info
 description: >
   Containts info about current platform
   such as Build mode and Operating system
-version: 1.0.0
+version: 1.0.1
 #author: Plague Fox <Plugfox@gmail.com>
 homepage: https://github.com/PlugFox/platform_info
 
