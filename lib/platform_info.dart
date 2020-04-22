@@ -41,7 +41,14 @@ export 'src/enums.dart';
 ///
 ///   + Operating system is known type
 ///
-///   + Is mobile device
+///   + Is mobile device (Android, iOS)
+///
+///   + Is desktop device (Windows, MacOS, Fuchsia)
+///
+///   + Is material (Android, Fuchsia)
+///
+///   + Is cupertino (MacOS, iOS)
+///
 ///
 class Platform {
   /// Build mode
@@ -78,13 +85,24 @@ class Platform {
   int get numberOfProcessors => _hostPlatform.numberOfProcessors;
 
   /// Operating system is known type
-  bool get isOperatingSystemKnown => operatingSystem != OperatingSystem.unknown;
+  bool get isOperatingSystemKnown => _isOperatingSystemKnown;
+  bool _isOperatingSystemKnown;
 
-  /// Is mobile device
-  bool get isMobile => <OperatingSystem>[
-        OperatingSystem.android,
-        OperatingSystem.iOS
-      ].contains(operatingSystem);
+  /// Is mobile device (Android, iOS)
+  bool get isMobile => _isMobile;
+  bool _isMobile;
+
+  /// Is desktop device (Windows, MacOS, Fuchsia)
+  bool get isDesktop => _isDesktop;
+  bool _isDesktop;
+
+  /// Is material (Android, Fuchsia)
+  bool get isMaterial => _isMaterial;
+  bool _isMaterial;
+
+  /// Is cupertino (MacOS, iOS)
+  bool get isCupertino => _isCupertino;
+  bool _isCupertino;
 
   /// Host platform
   /// contain info about host device
@@ -116,5 +134,35 @@ class Platform {
   static final Platform _this = Platform._internal();
   Platform._internal()
       : _hostPlatform = _getHostPlatform(),
-        buildMode = _getCurrentBuildMode();
+        buildMode = _getCurrentBuildMode() {
+    _isOperatingSystemKnown = operatingSystem != OperatingSystem.unknown;
+    _isMobile = <OperatingSystem>[OperatingSystem.android, OperatingSystem.iOS]
+        .contains(operatingSystem);
+    _isDesktop = <OperatingSystem>[
+      OperatingSystem.windows,
+      OperatingSystem.macOS,
+      OperatingSystem.fuchsia
+    ].contains(operatingSystem);
+    _isMaterial = <OperatingSystem>[
+      OperatingSystem.android,
+      OperatingSystem.fuchsia
+    ].contains(operatingSystem);
+    _isCupertino = <OperatingSystem>[OperatingSystem.macOS, OperatingSystem.iOS]
+        .contains(operatingSystem);
+  }
+
+  /// To JSON map<String, dynamic>
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'buildMode': buildMode.index,
+        'type': type.index,
+        'operatingSystem': operatingSystem.index,
+        'version': version,
+        'locale': locale,
+        'numberOfProcessors': numberOfProcessors,
+        'isOperatingSystemKnown': isOperatingSystemKnown,
+        'isMobile': isMobile,
+        'isDesktop': isDesktop,
+        'isMaterial': isMaterial,
+        'isCupertino': isCupertino,
+      };
 }

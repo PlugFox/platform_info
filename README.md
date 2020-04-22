@@ -7,7 +7,10 @@
   
 ## About  
   
+Cross-platform io/html package.  
 Works on the web, mobile phones, desktops and console.  
+Fully caches itself on first initialization.  
+Can serialize to JSON map.  
 Provides platform information such as:  
   + Build mode  
      * release  
@@ -35,9 +38,15 @@ Provides platform information such as:
   
   + Operating system is known type  
   
-  + Is mobile device  
+  + Is mobile device (Android, iOS)  
+
+  + Is desktop device (Windows, MacOS, Fuchsia)  
   
+  + Is material (Android, Fuchsia)  
   
+  + Is cupertino (MacOS, iOS)  
+  
+
 ### For example:  
   
 ```dart
