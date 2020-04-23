@@ -23,7 +23,7 @@ Provides platform information such as:
      * io  
      * web  
   
-  + Operation system  
+  + Operating system  
      * Fuchsia  
      * Linux  
      * MacOS  
