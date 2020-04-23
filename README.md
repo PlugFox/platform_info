@@ -1,4 +1,6 @@
 # platform_info  
+
+![](https://github.com/PlugFox/platform_info/raw/master/.img/logo.png)  
   
 [![chatroom icon](https://patrolavia.github.io/telegram-badge/chat.png)](https://t.me/PlugFox)
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/plugfox/platform_info/blob/master/LICENSE)
