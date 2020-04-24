@@ -1,4 +1,15 @@
-
+# 1.1.1+3  
+##### 2020-04-25  
+  
+Fix analysis_options.yaml  
+  
+  
+# 1.1.1+2  
+##### 2020-04-25  
+  
+Disable most dev_dependencies.  
+  
+  
 # 1.1.1+1  
 ##### 2020-04-23  
   
