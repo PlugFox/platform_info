@@ -15,6 +15,5 @@ environment:
 
 dev_dependencies:
   test: ^1.15.3
-  coverage: ^0.14.0
 
 #dependency_overrides:

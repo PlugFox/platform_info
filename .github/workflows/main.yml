@@ -21,11 +21,10 @@ jobs:
       #    - pub global run pana
       - name: Run tests
         run: pub run test test/test.dart --concurrency=6 --coverage=coverage
+      - name: Activate coverage:format_coverage
+        run: pub global activate coverage
       - name: Collect coverage
-        run: pub run coverage:format_coverage -l -i .\coverage\test\test.dart.vm.json -o coverage/lcov.info
-      #    - pub run test_coverage
-      #    - pub global activate coverage
-      #    - pub global run coverage:format_coverage -l -i .\coverage\test\test.dart.vm.json -o coverage/lcov.info
+        run: pub global run coverage:format_coverage -l -i ./coverage/test/test.dart.vm.json -o coverage/lcov.info
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
