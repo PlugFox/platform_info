@@ -17,8 +17,8 @@ jobs:
       - name: Format
         run: dartfmt --dry-run --set-exit-if-changed lib example test
       - name: Run analyzer
-        run: dartanalyzer lib example test
-     - name: Run tests
+        run: dartanalyzer --fatal-infos --fatal-warnings lib example test
+      - name: Run tests
         run: pub run test test/test.dart --concurrency=6
       - name: Run tests
         run: pub run test_coverage
