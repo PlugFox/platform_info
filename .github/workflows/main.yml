@@ -1,0 +1,32 @@
+name: Test and coverage
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dart
+        uses: google/dart:latest
+      - name: Install dependencies
+        run: pub get
+      - name: Run analyzer
+        run: dartanalyzer .
+      - name: Run pana
+        run: |
+          - pub global activate pana
+          - pub global run pana
+      - name: Run tests and collect coverage
+        run: |
+          - pub run test test/test.dart --concurrency=6 --coverage=coverage
+          - pub global activate coverage
+          - pub global run coverage:format_coverage -l -i .\coverage\test\test.dart.vm.json -o coverage/lcov.info
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage/lcov.info

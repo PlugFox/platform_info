@@ -1,8 +1,11 @@
-## 2.0.0-dev - 2020-08-28  
-### Added  
-- Two short form to access the instance of Platform  
+## 2.0.0 - 2020-08-28  
+### Added    
 - Add global getter platform  
 - operating system check  
+- Three short form to access the instance of Platform  
+   + `Platform.instance`  
+   + `Platform.I`  
+   + `platform`  
   
 ### Changed  
 - refactoring and new lints (pedantic + effective dart)  

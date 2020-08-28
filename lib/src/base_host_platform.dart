@@ -26,8 +26,9 @@ abstract class HostPlatform {
   /// Locale string
   String get locale;
 
-  /// The number of individual execution units of the machine.
-  /// 0 if unknown
+  /// The number of individual execution units of the machine
+  /// Returns 0 if unknown or not available
+  /// Use `.gcd(1)` if you need a quantity greater than 0
   int get numberOfProcessors;
 }
 
@@ -49,15 +50,15 @@ abstract class ExtendedHostPlatform implements HostPlatform {
   bool get isCupertino;
 
   /// Whether the operating system is a version of
-  /// [Linux](https://en.wikipedia.org/wiki/Linux).
+  /// [Linux](https://en.wikipedia.org/wiki/Linux)
   ///
   /// This value is `false` if the operating system is a specialized
   /// version of Linux that identifies itself by a different name,
-  /// for example Android (see [isAndroid]).
+  /// for example Android (see [isAndroid])
   bool get isLinux;
 
   /// Whether the operating system is a version of
-  /// [macOS](https://en.wikipedia.org/wiki/MacOS).
+  /// [macOS](https://en.wikipedia.org/wiki/MacOS)
   bool get isMacOS;
 
   /// Whether the operating system is a version of
@@ -65,15 +66,15 @@ abstract class ExtendedHostPlatform implements HostPlatform {
   bool get isWindows;
 
   /// Whether the operating system is a version of
-  /// [Android](https://en.wikipedia.org/wiki/Android_%28operating_system%29).
+  /// [Android](https://en.wikipedia.org/wiki/Android_%28operating_system%29)
   bool get isAndroid;
 
   /// Whether the operating system is a version of
-  /// [iOS](https://en.wikipedia.org/wiki/IOS).
+  /// [iOS](https://en.wikipedia.org/wiki/IOS)
   bool get isIOS;
 
   /// Whether the operating system is a version of
-  /// [Fuchsia](https://en.wikipedia.org/wiki/Google_Fuchsia).
+  /// [Fuchsia](https://en.wikipedia.org/wiki/Google_Fuchsia)
   bool get isFuchsia;
 
   /// Build mode
