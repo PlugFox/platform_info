@@ -7,11 +7,10 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    container: google/dart:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install dart
-        uses: google/dart:latest
       - name: Install dependencies
         run: pub get
       - name: Run analyzer
