@@ -4,7 +4,6 @@ on:
     branches: [ master, dev ]
   pull_request:
     branches: [ master, dev ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,13 +18,13 @@ jobs:
       - name: Run analyzer
         run: dartanalyzer --fatal-infos --fatal-warnings lib example test
       - name: Run tests
-        run: pub run test test/test.dart --concurrency=6
-      - name: Run tests
         run: pub run test_coverage
-      - name: Check Code Coverage
-        uses: ChicagoFlutter/lcov-cop@v1.0.0
-        with:
-          path: coverage/lcov.info
+      #- name: Check Code Coverage
+      #  uses: ChicagoFlutter/lcov-cop@v1.0.2
+      #  with:
+      #    path: coverage/lcov.info
+      #    min_coverage: 95
+      #    exclude: "**/*.g.dart"
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:

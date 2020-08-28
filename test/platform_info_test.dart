@@ -1,5 +1,3 @@
-library test.platform_info;
-
 import 'package:test/test.dart';
 import 'package:platform_info/platform_info.dart';
 
