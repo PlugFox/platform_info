@@ -12,17 +12,19 @@
 Cross-platform io/html package.  
 Works on the web, mobile phones, desktops and console.  
 Fully caches itself on first initialization.  
-Can serialize to JSON map.  
+
+Easy to use, just import: 
+
 Provides platform information such as:  
   + Build mode  
      * release  
      * profile  
      * debug  
-  
+    
   + Host platform type  
-     * io  
-     * web  
-  
+     * io (vm, desktops, mobile, console)  
+     * web (html, js, browser)  
+    
   + Operating system  
      * Fuchsia  
      * Linux  
@@ -31,31 +33,47 @@ Provides platform information such as:
      * iOS  
      * Android  
      * Unknown  
-  
+    
   + Version  
-  
+    
   + Locale string  
-  
-  + The number of individual execution units of the machine.  
-  
+    
+  + The number of individual execution units of the machine  
+    
   + Operating system is known type  
+    
+  + Is a mobile device (Android, iOS)  
+    
+  + Is a desktop device (Windows, macOS, Fuchsia)  
+    
+  + Is material design device (Android, Fuchsia)  
+    
+  + Is cupertino design device (macOS, iOS)  
+    
+  + isLinux  
+    
+  + isMacOS  
+    
+  + isWindows  
+    
+  + isAndroid  
+    
+  + isIOS  
+    
+  + isFuchsia  
   
-  + Is mobile device (Android, iOS)  
-
-  + Is desktop device (Windows, MacOS, Fuchsia)  
   
-  + Is material (Android, Fuchsia)  
-  
-  + Is cupertino (MacOS, iOS)  
-  
-
 ### For example:  
   
 ```dart
-  // Just create Platform() singleton object
-  final Platform _platform = Platform();
-  final String version = _platform.version;
-  print(version);
+import 'package:platform_info/platform_info.dart';
+
+void main(List<String> args) {
+  // Use [Platform.instance] or [Platform.I] or [platform] getter
+  print(Platform.instance.numberOfProcessors);
+  print(Platform.I.operatingSystem);
+  print(Platform.I.version);
+}
 ```
   
   

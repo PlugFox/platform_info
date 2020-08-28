@@ -1,12 +1,13 @@
 import 'dart:html' as html show window;
 import 'base_host_platform.dart';
+import 'constants.dart';
 import 'enums.dart';
 
 /// Get host platform if dart.library.html available
-HostPlatform getHostPlatform() => WebHostPlatform();
+HostPlatform getHostPlatform() => _WebHostPlatform();
 
 /// Web based host platform
-class WebHostPlatform implements HostPlatform {
+class _WebHostPlatform implements HostPlatform {
   @override
   final HostPlatformType type = HostPlatformType.web;
 
@@ -23,7 +24,7 @@ class WebHostPlatform implements HostPlatform {
   int numberOfProcessors = _numberOfProcessors();
 
   static OperatingSystem _getOS() {
-    final String appVersion = _getVersion().toLowerCase();
+    final appVersion = _getVersion().toLowerCase();
     if (appVersion.contains('fuchsia')) {
       return OperatingSystem.fuchsia;
     } else if (appVersion.contains('mac')) {
@@ -39,26 +40,29 @@ class WebHostPlatform implements HostPlatform {
     } else if (appVersion.contains('linux')) {
       return OperatingSystem.linux;
     }
-    return OperatingSystem.unknown;
+    return kDefaultHostPlatform.operatingSystem;
   }
 
-  static String _getVersion() =>
-      html.window?.navigator?.userAgent ??
-      html.window?.navigator?.appVersion ??
-      'unknown';
+  static String _getVersion() => [
+        html.window?.navigator?.userAgent,
+        html.window?.navigator?.appVersion,
+        html.window?.navigator?.platform,
+      ].firstWhere((v) => v is String && v.isNotEmpty,
+          orElse: () => kDefaultHostPlatform.version);
 
   static int _numberOfProcessors() =>
-      html.window?.navigator?.hardwareConcurrency ?? 0;
+      html.window?.navigator?.hardwareConcurrency ??
+      kDefaultHostPlatform.numberOfProcessors;
 
   static String _getLocale() {
-    String lang = html.window.navigator.language
+    final lang = html.window.navigator.language
         ?.split('-')
         ?.first
         ?.split('_')
         ?.first
         ?.trim()
         ?.toLowerCase();
-    if (lang is! String || lang.length != 2) return 'en';
+    if (lang is! String || lang.length != 2) return kDefaultHostPlatform.locale;
     return lang;
   }
 }

@@ -1,12 +1,13 @@
 import 'dart:io' as io show Platform;
 import 'base_host_platform.dart';
+import 'constants.dart';
 import 'enums.dart';
 
 /// Get host platform if dart.library.io available
-HostPlatform getHostPlatform() => IOHostPlatform();
+HostPlatform getHostPlatform() => _IOHostPlatform();
 
 /// i/o based host platform
-class IOHostPlatform implements HostPlatform {
+class _IOHostPlatform implements HostPlatform {
   @override
   final HostPlatformType type = HostPlatformType.io;
 
@@ -20,7 +21,7 @@ class IOHostPlatform implements HostPlatform {
   final String locale = _getLocale();
 
   @override
-  int numberOfProcessors = _numberOfProcessors();
+  final int numberOfProcessors = _numberOfProcessors();
 
   static OperatingSystem _getOS() {
     if (io.Platform.isFuchsia) {
@@ -36,23 +37,25 @@ class IOHostPlatform implements HostPlatform {
     } else if (io.Platform.isLinux) {
       return OperatingSystem.linux;
     }
-    return OperatingSystem.unknown;
+    return kDefaultHostPlatform.operatingSystem;
   }
 
   static String _getVersion() =>
-      io.Platform?.operatingSystemVersion ?? 'unknown';
+      io.Platform?.operatingSystemVersion ?? kDefaultHostPlatform.version;
 
-  static int _numberOfProcessors() => io.Platform?.numberOfProcessors ?? 0;
+  static int _numberOfProcessors() =>
+      io.Platform?.numberOfProcessors ??
+      kDefaultHostPlatform.numberOfProcessors;
 
   static String _getLocale() {
-    String lang = io.Platform.localeName
+    final lang = io.Platform.localeName
         ?.split('-')
         ?.first
         ?.split('_')
         ?.first
         ?.trim()
         ?.toLowerCase();
-    if (lang is! String || lang.length != 2) return 'en';
+    if (lang is! String || lang.length != 2) return kDefaultHostPlatform.locale;
     return lang;
   }
 }

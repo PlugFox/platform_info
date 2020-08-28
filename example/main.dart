@@ -2,9 +2,9 @@
 
 import 'package:platform_info/platform_info.dart';
 
-void main() {
-  // Just create Platform() singleton object
-  final Platform _platform = Platform();
-  final String version = _platform.version;
-  print(version);
+void main(List<String> args) {
+  // Use [Platform.instance] or [Platform.I] or [platform] getter
+  print(Platform.instance.numberOfProcessors);
+  print(Platform.I.operatingSystem);
+  print(Platform.I.version);
 }

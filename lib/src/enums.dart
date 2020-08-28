@@ -14,13 +14,13 @@ enum BuildMode {
 }
 
 /// Host platform type
-///  + io
-///  + web
+///  + io (vm, desktops, mobile, console)
+///  + web (html, js, browser)
 enum HostPlatformType {
-  /// IO
+  /// IO (desktops, mobile, console)
   io,
 
-  /// Web
+  /// Web (browser)
   web,
 }
 
@@ -33,8 +33,11 @@ enum HostPlatformType {
 ///  + Android
 ///  + Unknown
 enum OperatingSystem {
-  /// Fuchsia
-  fuchsia,
+  /// Unknown
+  unknown,
+
+  /// Windows
+  windows,
 
   /// Linux
   linux,
@@ -42,15 +45,12 @@ enum OperatingSystem {
   /// MacOS
   macOS,
 
-  /// Windows
-  windows,
-
   /// iOS
   iOS,
 
   /// Android
   android,
 
-  /// Unknown
-  unknown,
+  /// Fuchsia
+  fuchsia,
 }

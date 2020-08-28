@@ -2,26 +2,26 @@ import 'base_host_platform.dart';
 import 'enums.dart';
 
 /// Get host platform if dart.library.html and dart.library.io available
-HostPlatform getHostPlatform() => const UnknownHostPlatform();
+HostPlatform getHostPlatform() => const DefaultHostPlatform();
 
-/// Unknown host platform
-class UnknownHostPlatform implements HostPlatform {
-  /// Unknown host platform constructor
-  const UnknownHostPlatform();
+/// Unknown host platform with default values
+class DefaultHostPlatform implements HostPlatform {
+  /// Unknown host platform with default values
+  const DefaultHostPlatform();
 
   @override
-  final HostPlatformType type =
+  HostPlatformType get type =>
       identical(0, 0.0) ? HostPlatformType.web : HostPlatformType.io;
 
   @override
-  final OperatingSystem operatingSystem = OperatingSystem.unknown;
+  OperatingSystem get operatingSystem => OperatingSystem.unknown;
 
   @override
-  final String version = 'unknown';
+  String get version => '<unknown>';
 
   @override
-  final String locale = 'en';
+  String get locale => 'en';
 
   @override
-  final int numberOfProcessors = 0;
+  int get numberOfProcessors => 0;
 }

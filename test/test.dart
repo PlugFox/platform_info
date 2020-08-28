@@ -6,17 +6,16 @@ import 'package:platform_info/platform_info.dart';
 void main() {
   group('platform_info', () {
     test('shouldRun', () {
-      Platform();
-      expect(true, true);
+      expect(Platform.I, platform);
+      expect(() => Platform.I, returnsNormally);
     });
 
     test('shouldCreate', () {
-      Platform platform = Platform();
+      final platform = Platform.I;
       expect(platform is Platform, true);
     });
 
     test('types', () {
-      Platform platform = Platform();
       expect(platform is Platform, true);
       expect(platform.buildMode is BuildMode, true);
       expect(platform.isMobile is bool, true);
@@ -29,18 +28,22 @@ void main() {
       expect(platform.operatingSystem is OperatingSystem, true);
       expect(platform.type is HostPlatformType, true);
       expect(platform.version is String, true);
-    });
-
-    test('toJson', () {
-      Platform platform = Platform();
-      expect(platform.toJson() is Map<String, dynamic>, true);
+      expect(platform.isAndroid is bool, true);
+      expect(platform.isWindows is bool, true);
+      expect(platform.isFuchsia is bool, true);
+      expect(platform.isIOS is bool, true);
+      expect(platform.isLinux is bool, true);
+      expect(platform.isMacOS is bool, true);
     });
 
     test('identical', () {
-      Platform platform1 = Platform();
-      Platform platform2 = Platform();
+      final platform1 = Platform.I;
+      final platform2 = Platform.instance;
+      final platform3 = platform;
       expect(platform1 == platform2, true);
+      expect(platform2 == platform3, true);
       expect(identical(platform1, platform2), true);
+      expect(identical(platform2, platform3), true);
     });
   });
 }
