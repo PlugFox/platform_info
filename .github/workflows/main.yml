@@ -1,32 +1,31 @@
-name: Test and coverage
+name: platform_info
 on:
   push:
     branches: [ master, dev ]
   pull_request:
     branches: [ master, dev ]
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
-    container: plugfox/flutter:stable # google/dart:latest
+    container:
+      image: google/dart:latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install dependencies
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
         run: pub get
-      - name: Run analyzer
-        run: dartanalyzer .
-      #- name: Run pana
-      #  run: |
-      #    - pub global activate pana
-      #    - pub global run pana
+      - name: Format
+        run: dartfmt --dry-run --set-exit-if-changed .
+      - name: Analyze
+        run: dartanalyzer --fatal-infos --fatal-warnings lib test example
+     - name: Run tests
+        run: pub run test test/test.dart --concurrency=6
       - name: Run tests
-        run: pub run test test/test.dart --concurrency=6 --coverage=coverage
-      - name: Activate coverage:format_coverage
-        run: pub global activate coverage
-      - name: Collect coverage
-        run: pub global run coverage:format_coverage -l -i ./coverage/test/test.dart.vm.json -o coverage/lcov.info
+        run: pub run test_coverage
+      - name: Check Code Coverage
+        uses: ChicagoFlutter/lcov-cop@v1.0.0
+        with:
+          path: coverage/lcov.info
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: coverage/lcov.info

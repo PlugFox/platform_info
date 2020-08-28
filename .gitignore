@@ -19,3 +19,5 @@ doc
 # Include when developing application packages.
 pubspec.lock
 coverage*
+
+/test/.test_coverage.dart
