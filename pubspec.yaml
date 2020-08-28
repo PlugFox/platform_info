@@ -9,11 +9,12 @@ homepage: https://github.com/PlugFox/platform_info
 #publish_to: 'none' 
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 #dependencies:
 
 dev_dependencies:
   test: ^1.15.3
+  test_coverage: ^0.4.3
 
 #dependency_overrides:
