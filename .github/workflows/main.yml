@@ -20,7 +20,7 @@ jobs:
       #    - pub global activate pana
       #    - pub global run pana
       - name: Run tests
-        run: pub run test test/test.dart --concurrency=6
+        run: pub run test test/test.dart --concurrency=6 --coverage=coverage
       - name: Collect coverage
         run: pub run coverage:format_coverage -l -i .\coverage\test\test.dart.vm.json -o coverage/lcov.info
       #    - pub run test_coverage
