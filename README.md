@@ -1,9 +1,12 @@
 # platform_info  
   
 ![](https://github.com/PlugFox/platform_info/raw/master/.img/logo.png)  
-   
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/plugfox/platform_info/blob/master/LICENSE)  
-[![Pub](https://img.shields.io/pub/v/platform_info.svg)](https://pub.dartlang.org/packages/platform_info)  
+  
+[![Actions Status](https://github.com/PlugFox/platform_info/workflows/platform_info/badge.svg)](https://github.com/PlugFox/platform_info/actions)
+[![Coverage](https://codecov.io/gh/PlugFox/platform_info/branch/master/graph/badge.svg)](https://codecov.io/gh/PlugFox/platform_info)
+[![Pub](https://img.shields.io/pub/v/platform_info.svg)](https://pub.dev/packages/platform_info)
+[![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/about/)
+[![effective_dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/tenhobi/effective_dart)
   
   
 ## About  
@@ -12,14 +15,14 @@ Cross-platform io/html package.
 Works on the web, mobile phones, desktops and console.  
 Fully caches itself on first initialization.  
   
-Easy to use, just import:  
+Easy to use, just add to `pubspec.yaml` as dependency and then import:  
 `import 'package:platform_info/platform_info.dart';`  
   
-GetIt is a singleton and the default way to access an instance of GetIt is to call:
-`Platform.instance` or `Platform.I` or `platform`
+Platform is a singleton, and the default way to access an instance of Platform is to call static getters:  
+`Platform.instance` or `Platform.I` or `platform`  
   
   
-## Platform Information:  
+## Platform Information  
   
 Provides platform information such as:  
   + Build mode  
@@ -69,7 +72,7 @@ Provides platform information such as:
   + isFuchsia  
   
   
-## For example:  
+## For example  
   
 ```dart
 import 'package:platform_info/platform_info.dart';
@@ -83,8 +86,23 @@ void main(List<String> args) {
 ```
   
   
+## Coverage  
+  
+![](https://codecov.io/gh/PlugFox/platform_info/branch/dev/graphs/sunburst.svg)  
+  
+  
 ## Changelog  
   
 Refer to the [Changelog](https://github.com/plugfox/platform_info/blob/master/CHANGELOG.md) to get all release notes.  
+  
+  
+## Maintainers  
+  
+[Plague Fox](https://plugfox.dev)  
+  
+  
+## License  
+  
+[WTFPL](https://github.com/plugfox/platform_info/blob/master/LICENSE)  
   
   
