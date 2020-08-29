@@ -1,13 +1,16 @@
 import 'dart:html' as html show window;
+
 import 'base_host_platform.dart';
 import 'constants.dart';
 import 'enums.dart';
 
 /// Get host platform if dart.library.html available
-HostPlatform getHostPlatform() => _WebHostPlatform();
+HostPlatform getHostPlatform() => _WebHostPlatform._();
 
 /// Web based host platform
 class _WebHostPlatform implements HostPlatform {
+  _WebHostPlatform._();
+
   @override
   final HostPlatformType type = HostPlatformType.web;
 

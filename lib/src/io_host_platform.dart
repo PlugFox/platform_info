@@ -1,13 +1,17 @@
 import 'dart:io' as io show Platform;
+
 import 'base_host_platform.dart';
 import 'constants.dart';
 import 'enums.dart';
 
 /// Get host platform if dart.library.io available
-HostPlatform getHostPlatform() => _IOHostPlatform();
+HostPlatform getHostPlatform() => _IOHostPlatform._();
 
 /// i/o based host platform
 class _IOHostPlatform implements HostPlatform {
+
+  _IOHostPlatform._();
+
   @override
   final HostPlatformType type = HostPlatformType.io;
 

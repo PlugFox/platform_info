@@ -9,15 +9,10 @@ issue_tracker: https://github.com/PlugFox/platform_info/issues
 homepage: https://github.com/PlugFox/platform_info
 documentation: https://pub.dev/documentation/platform_info/latest
 
-#publish_to: 'none' 
-
 environment:
   sdk: ">=2.6.0 <3.0.0"
-
-#dependencies:
 
 dev_dependencies:
   test_coverage: ^0.4.3
   test: ^1.15.3
 
-#dependency_overrides:
