@@ -1,9 +1,12 @@
-import 'package:platform_info/src/stub_host_platform.dart';
+import 'dart:async';
+
+import 'package:platform_info/src/stub_host_platform.dart' as stub;
+import 'package:platform_info/src/io_host_platform.dart' as io;
 import 'package:test/test.dart';
 import 'package:platform_info/platform_info.dart';
 
 void main() {
-  group('platform_info', () {
+  group('Platform', () {
     test('shouldRun', () {
       expect(Platform.I, platform);
       expect(() => Platform.I, returnsNormally);
@@ -55,17 +58,32 @@ void main() {
     test('toString', () {
       expect(Platform.I.toString(), Platform.I.version);
     });
+  });
 
+  group('Stub platform', () {
     test('Default values', () {
-      final def = getHostPlatform();
+      final stubPlatform = stub.getHostPlatform();
       const type = identical(0, 0.0)
           ? HostPlatformType.web
           : HostPlatformType.io;
-      expect(def.operatingSystem, OperatingSystem.unknown);
-      expect(def.numberOfProcessors, 0);
-      expect(def.locale, 'en');
-      expect(def.version, '<unknown>');
-      expect(def.type, type);
+      expect(stubPlatform.operatingSystem, OperatingSystem.unknown);
+      expect(stubPlatform.numberOfProcessors, 0);
+      expect(stubPlatform.locale, 'en');
+      expect(stubPlatform.version, '<unknown>');
+      expect(stubPlatform.type, type);
+    });
+  });
+
+  group('io platform test', () {
+    test('unknown enviroment', () {
+      runZoned(() {
+        final ioPlatform = io.getHostPlatform();
+        expect(ioPlatform.operatingSystem, OperatingSystem.unknown);
+        expect(ioPlatform.numberOfProcessors, 0);
+        expect(ioPlatform.locale, 'en');
+        expect(ioPlatform.version, '<unknown>');
+        expect(ioPlatform.type, HostPlatformType.io);
+      }, zoneValues: {#platform_info_test.isUnknownEnvironment: true});
     });
   });
 }
