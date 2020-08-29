@@ -65,6 +65,10 @@ void main() {
       final stubPlatform = stub.getHostPlatform();
       const type =
           identical(0, 0.0) ? HostPlatformType.web : HostPlatformType.io;
+      expect(() => const stub.DefaultHostPlatform(), returnsNormally);
+      // ignore: prefer_const_constructors
+      expect(() => stub.DefaultHostPlatform(), returnsNormally);
+      expect(stubPlatform, const stub.DefaultHostPlatform());
       expect(stubPlatform.operatingSystem, OperatingSystem.unknown);
       expect(stubPlatform.numberOfProcessors, 0);
       expect(stubPlatform.locale, 'en');
@@ -74,7 +78,7 @@ void main() {
   });
 
   group('io platform test', () {
-    test('unknown enviroment', () {
+    test('unknown environment', () {
       runZoned(() {
         final ioPlatform = io.getHostPlatform();
         expect(ioPlatform.operatingSystem, OperatingSystem.unknown);
