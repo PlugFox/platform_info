@@ -43,11 +43,11 @@ Provides platform information such as:
      * Android  
      * Unknown  
     
-  + Version ('<unknown>' if not available)  
+  + Version (`<unknown>` if not available)  
     
-  + Locale string ('en' if not available)  
+  + Locale string (`en` if not available)  
     
-  + The number of individual execution units of the machine (0 if not available)  
+  + The number of individual execution units of the machine (`0` if not available)  
     
   + Operating system is known type  
     
