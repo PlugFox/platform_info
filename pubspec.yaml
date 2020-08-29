@@ -3,10 +3,10 @@ description: >
   Contains info about current platform
   such as Build mode and Operating system
 version: 2.0.0
-author: Plague Fox <plugfox@gmail.com>
 repository: https://github.com/PlugFox/platform_info/tree/master
 issue_tracker: https://github.com/PlugFox/platform_info/issues
 homepage: https://github.com/PlugFox/platform_info
+#author: Plague Fox <plugfox@gmail.com>
 #documentation: https://pub.dev/documentation/platform_info/latest
 
 environment:
