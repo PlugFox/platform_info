@@ -10,14 +10,12 @@ HostPlatform getHostPlatform() => _IOHostPlatform._();
 
 /// i/o based host platform
 class _IOHostPlatform implements HostPlatform {
-
   _IOHostPlatform._();
 
   static bool get _isUnknownEnvironment =>
       Zone.current[#platform_info_test.isUnknownEnvironment] as bool ?? false;
 
-  static bool get _isKnownEnvironment =>
-      !_isUnknownEnvironment;
+  static bool get _isKnownEnvironment => !_isUnknownEnvironment;
 
   @override
   final HostPlatformType type = HostPlatformType.io;

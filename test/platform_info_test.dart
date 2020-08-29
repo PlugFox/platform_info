@@ -63,9 +63,8 @@ void main() {
   group('Stub platform', () {
     test('Default values', () {
       final stubPlatform = stub.getHostPlatform();
-      const type = identical(0, 0.0)
-          ? HostPlatformType.web
-          : HostPlatformType.io;
+      const type =
+          identical(0, 0.0) ? HostPlatformType.web : HostPlatformType.io;
       expect(stubPlatform.operatingSystem, OperatingSystem.unknown);
       expect(stubPlatform.numberOfProcessors, 0);
       expect(stubPlatform.locale, 'en');

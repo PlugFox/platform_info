@@ -15,8 +15,7 @@ class _WebHostPlatform implements HostPlatform {
   static bool get _isUnknownEnvironment =>
       Zone.current[#platform_info_test.isUnknownEnvironment] as bool ?? false;
 
-  static bool get _isKnownEnvironment =>
-      !_isUnknownEnvironment;
+  static bool get _isKnownEnvironment => !_isUnknownEnvironment;
 
   @override
   final HostPlatformType type = HostPlatformType.web;
