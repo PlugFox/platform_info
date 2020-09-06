@@ -20,10 +20,12 @@ void main() {
     test('types', () {
       expect(platform is Platform, isTrue);
       expect(platform.buildMode is BuildMode, isTrue);
+      expect(platform.isWeb is bool, isTrue);
+      expect(platform.isIO is bool, isTrue);
+      expect(platform.isDesktop is bool, isTrue);
       expect(platform.isMobile is bool, isTrue);
       expect(platform.isCupertino is bool, isTrue);
       expect(platform.isMaterial is bool, isTrue);
-      expect(platform.isDesktop is bool, isTrue);
       expect(platform.isOperatingSystemKnown is bool, isTrue);
       expect(platform.locale is String, isTrue);
       expect(platform.numberOfProcessors is int, isTrue);

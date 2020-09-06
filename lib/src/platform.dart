@@ -68,6 +68,12 @@ class Platform implements ExtendedHostPlatform {
   bool _isOperatingSystemKnown;
 
   @override
+  bool get isWeb => _hostPlatform.type == HostPlatformType.web;
+
+  @override
+  bool get isIO => _hostPlatform.type == HostPlatformType.io;
+
+  @override
   bool get isMobile => _isMobile;
   bool _isMobile;
 

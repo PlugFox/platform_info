@@ -50,7 +50,11 @@ Provides platform information such as:
   + The number of individual execution units of the machine (`0` if not available)  
     
   + Operating system is known type  
-    
+  
+  + Is a web-based applications  
+  
+  + Is a I/O supporting for non-web applications  
+  
   + Is a mobile device (Android, iOS)  
     
   + Is a desktop device (Windows, macOS, Fuchsia)  

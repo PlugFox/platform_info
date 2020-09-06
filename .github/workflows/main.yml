@@ -14,7 +14,7 @@ jobs:
       - name: Install Dependencies
         run: pub get
       - name: Format
-        run: dartfmt --dry-run --set-exit-if-changed lib example test
+        run: dartfmt --dry-run --set-exit-if-changed lib
       - name: Run analyzer
         run: dartanalyzer --fatal-infos --fatal-warnings lib example test
       - name: Run tests

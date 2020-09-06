@@ -1,3 +1,10 @@
+## 2.0.1 - 2020-09-06  
+### Added  
+- Add getters:  
+   + `isWeb` - Is a web-based applications  
+   + `isIO`  - Is a I/O supporting for non-web applications  
+   
+   
 ## 2.0.0 - 2020-08-28  
 ### Added    
 - Add global getter platform  

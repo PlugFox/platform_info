@@ -34,6 +34,12 @@ abstract class HostPlatform {
 
 /// Extended host platform
 abstract class ExtendedHostPlatform implements HostPlatform {
+  /// Is web-based applications
+  bool get isWeb;
+
+  /// Is I/O supporting for non-web applications
+  bool get isIO;
+
   /// Operating system is known type
   bool get isOperatingSystemKnown;
 
