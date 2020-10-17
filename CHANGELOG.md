@@ -1,3 +1,8 @@
+## 2.1.0 - 2020-10-18  
+### Changed  
+- Fix `kListOSWithCupertinoDesign` constant and `isCupertino` flag  
+   
+  
 ## 2.0.1 - 2020-09-06  
 ### Added  
 - Add getters:  
