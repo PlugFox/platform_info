@@ -16,8 +16,8 @@ const List<OperatingSystem> kListOSWithMaterialDesign = <OperatingSystem>[
 
 /// List of all operating systems with cupertino design
 const List<OperatingSystem> kListOSWithCupertinoDesign = <OperatingSystem>[
-  OperatingSystem.android,
-  OperatingSystem.fuchsia,
+  OperatingSystem.macOS,
+  OperatingSystem.iOS,
 ];
 
 /// List of all desktop operating systems
