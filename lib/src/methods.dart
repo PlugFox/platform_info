@@ -81,51 +81,61 @@ mixin PlatformMethods on ExtendedHostPlatform {
     PlatformResult Function() debug,
     PlatformResult Function() orElse,
   }) {
-    // Operating System
-    if (fuchsia != null && isFuchsia) {
-      return fuchsia();
-    } else if (windows != null && isWindows) {
-      return windows();
-    } else if (android != null && isAndroid) {
-      return android();
-    } else if (iOS != null && isIOS) {
-      return iOS();
-    } else if (macOS != null && isMacOS) {
-      return macOS();
-    } else if (linux != null && isLinux) {
-      return linux();
-    } else if (unknown != null && !isOperatingSystemKnown) {
-      return unknown();
+    {
+      // Operating System
+      if (fuchsia != null && isFuchsia) {
+        return fuchsia();
+      } else if (windows != null && isWindows) {
+        return windows();
+      } else if (android != null && isAndroid) {
+        return android();
+      } else if (iOS != null && isIOS) {
+        return iOS();
+      } else if (macOS != null && isMacOS) {
+        return macOS();
+      } else if (linux != null && isLinux) {
+        return linux();
+      } else if (unknown != null && !isOperatingSystemKnown) {
+        return unknown();
+      }
     }
 
-    // Design
-    if (material != null && isMaterial) {
-      return material();
-    } else if (cupertino != null && isCupertino) {
-      return cupertino();
+    {
+      // Design
+      if (material != null && isMaterial) {
+        return material();
+      } else if (cupertino != null && isCupertino) {
+        return cupertino();
+      }
     }
 
-    // Mobile/Desktop
-    if (mobile != null && isMobile) {
-      return mobile();
-    } else if (desktop != null && isDesktop) {
-      return desktop();
+    {
+      // Mobile/Desktop
+      if (mobile != null && isMobile) {
+        return mobile();
+      } else if (desktop != null && isDesktop) {
+        return desktop();
+      }
     }
 
-    // IO/Web
-    if (io != null && isIO) {
-      return io();
-    } else if (web != null && isWeb) {
-      return web();
+    {
+      // IO/Web
+      if (io != null && isIO) {
+        return io();
+      } else if (web != null && isWeb) {
+        return web();
+      }
     }
 
-    // Build mode
-    if (debug != null && buildMode == BuildMode.debug) {
-      return debug();
-    } else if (profile != null && buildMode == BuildMode.profile) {
-      return profile();
-    } else if (release != null && buildMode == BuildMode.release) {
-      return release();
+    {
+      // Build mode
+      if (debug != null && buildMode == BuildMode.debug) {
+        return debug();
+      } else if (profile != null && buildMode == BuildMode.profile) {
+        return profile();
+      } else if (release != null && buildMode == BuildMode.release) {
+        return release();
+      }
     }
 
     // Any callback was not called

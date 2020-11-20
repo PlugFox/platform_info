@@ -81,14 +81,17 @@ void main() {
 
   group('io platform test', () {
     test('unknown environment', () {
-      runZoned(() {
-        final ioPlatform = io.getHostPlatform();
-        expect(ioPlatform.operatingSystem, OperatingSystem.unknown);
-        expect(ioPlatform.numberOfProcessors, 0);
-        expect(ioPlatform.locale, 'en');
-        expect(ioPlatform.version, '<unknown>');
-        expect(ioPlatform.type, HostPlatformType.io);
-      }, zoneValues: {#platform_info_test.isUnknownEnvironment: true});
+      runZoned(
+        () {
+          final ioPlatform = io.getHostPlatform();
+          expect(ioPlatform.operatingSystem, OperatingSystem.unknown);
+          expect(ioPlatform.numberOfProcessors, 0);
+          expect(ioPlatform.locale, 'en');
+          expect(ioPlatform.version, '<unknown>');
+          expect(ioPlatform.type, HostPlatformType.io);
+        },
+        zoneValues: {#platform_info_test.isUnknownEnvironment: true},
+      );
     });
   });
 
@@ -96,115 +99,180 @@ void main() {
     bool returnTrue() => true;
     bool returnFalse() => false;
 
+    FakePlatform platform;
+
+    setUpAll(() {
+      platform = FakePlatform();
+    });
+
     test('Operating System', () {
+      platform
+        ..reset()
+        ..isFuchsia = true;
       expect(
           platform.when(
             fuchsia: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isFuchsia);
+          isTrue);
+
+      platform
+        ..reset()
+        ..isWindows = true;
       expect(
           platform.when(
             windows: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isWindows);
+          isTrue);
+
+      platform
+        ..reset()
+        ..isAndroid = true;
       expect(
           platform.when(
             android: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isAndroid);
+          isTrue);
+
+      platform
+        ..reset()
+        ..isIOS = true;
       expect(
           platform.when(
             iOS: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isIOS);
+          isTrue);
+
+      platform
+        ..reset()
+        ..isMacOS = true;
       expect(
           platform.when(
             macOS: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isMacOS);
+          isTrue);
+
+      platform
+        ..reset()
+        ..isLinux = true;
       expect(
           platform.when(
             linux: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isLinux);
+          isTrue);
+
+      platform
+        ..reset()
+        ..isOperatingSystemKnown = false;
       expect(
           platform.when(
             unknown: returnTrue,
             orElse: returnFalse,
           ),
-          !platform.isOperatingSystemKnown);
+          isTrue);
     });
 
     test('Design', () {
+      platform
+        ..reset()
+        ..isMaterial = true;
       expect(
           platform.when(
             material: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isMaterial);
+          isTrue);
+
+      platform
+        ..reset()
+        ..isCupertino = true;
       expect(
           platform.when(
             cupertino: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isCupertino);
+          isTrue);
     });
 
     test('Mobile/Desktop', () {
+      platform
+        ..reset()
+        ..isMobile = true;
       expect(
           platform.when(
             mobile: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isMobile);
+          isTrue);
+
+      platform
+        ..reset()
+        ..isDesktop = true;
       expect(
           platform.when(
             desktop: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isDesktop);
+          isTrue);
     });
 
     test('IO or Web', () {
+      platform
+        ..reset()
+        ..isIO = true;
       expect(
           platform.when(
             io: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isIO);
+          isTrue);
+
+      platform
+        ..reset()
+        ..isWeb = true;
       expect(
           platform.when(
             web: returnTrue,
             orElse: returnFalse,
           ),
-          platform.isWeb);
+          isTrue);
     });
 
     test('Build mode', () {
+      platform
+        ..reset()
+        ..buildMode = BuildMode.debug;
       expect(
           platform.when(
             debug: returnTrue,
             orElse: returnFalse,
           ),
-          platform.buildMode == BuildMode.debug);
+          isTrue);
+
+      platform
+        ..reset()
+        ..buildMode = BuildMode.profile;
       expect(
           platform.when(
             profile: returnTrue,
             orElse: returnFalse,
           ),
-          platform.buildMode == BuildMode.profile);
+          isTrue);
+
+      platform
+        ..reset()
+        ..buildMode = BuildMode.release;
       expect(
           platform.when(
             release: returnTrue,
             orElse: returnFalse,
           ),
-          platform.buildMode == BuildMode.release);
+          isTrue);
     });
 
     test('orElse', () {
@@ -213,11 +281,13 @@ void main() {
             orElse: returnTrue,
           ),
           isTrue);
+
       expect(
           platform.when(
             orElse: returnFalse,
           ),
           isFalse);
+
       expect(platform.when(), isNull);
     });
 
@@ -229,7 +299,7 @@ void main() {
               cupertino: returnTrue,
               orElse: returnTrue,
             ),
-            orElse: returnTrue,
+            orElse: returnFalse,
           ),
           isTrue);
     });

@@ -108,7 +108,8 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   bool get isWindows => operatingSystem == OperatingSystem.windows;
 
   @override
-  final BuildMode buildMode;
+  BuildMode get buildMode => _buildMode;
+  BuildMode _buildMode;
 
   /// Host platform
   /// contain info about host device
@@ -138,13 +139,15 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   static final Platform _this = Platform._internal();
   Platform._internal()
       : _hostPlatform = _getHostPlatform(),
-        buildMode = _getCurrentBuildMode() {
+        _buildMode = _getCurrentBuildMode() {
     _isOperatingSystemKnown = operatingSystem != OperatingSystem.unknown;
     _isMobile = kListOSForMobile.contains(operatingSystem);
     _isDesktop = kListOSForDesktop.contains(operatingSystem);
     _isMaterial = kListOSWithMaterialDesign.contains(operatingSystem);
     _isCupertino = kListOSWithCupertinoDesign.contains(operatingSystem);
   }
+
+  Platform._emptyForTest() : _hostPlatform = _getHostPlatform();
 
   @override
   int get hashCode => 0;
@@ -154,4 +157,92 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
 
   @override
   String toString() => version;
+}
+
+/// Fake platform for test
+class FakePlatform extends Platform with PlatformMethods {
+  /// @nodoc
+  FakePlatform() : super._emptyForTest() {
+    reset();
+  }
+
+  @override
+  BuildMode buildMode;
+
+  @override
+  bool isAndroid;
+
+  @override
+  bool isCupertino;
+
+  @override
+  bool isDesktop;
+
+  @override
+  bool isFuchsia;
+
+  @override
+  bool isIO;
+
+  @override
+  bool isIOS;
+
+  @override
+  bool isLinux;
+
+  @override
+  bool isMacOS;
+
+  @override
+  bool isMaterial;
+
+  @override
+  bool isMobile;
+
+  @override
+  bool isOperatingSystemKnown;
+
+  @override
+  bool isWeb;
+
+  @override
+  bool isWindows;
+
+  @override
+  String locale;
+
+  @override
+  int numberOfProcessors;
+
+  @override
+  OperatingSystem operatingSystem;
+
+  @override
+  HostPlatformType type;
+
+  @override
+  String version;
+
+  /// @nodoc
+  void reset() {
+    buildMode = BuildMode.debug;
+    isFuchsia = false;
+    isWindows = false;
+    isAndroid = false;
+    isIOS = false;
+    isMacOS = false;
+    isLinux = true;
+    isMaterial = false;
+    isCupertino = false;
+    isMobile = false;
+    isDesktop = true;
+    locale = 'en';
+    numberOfProcessors = 1;
+    operatingSystem = OperatingSystem.linux;
+    isOperatingSystemKnown = true;
+    isIO = true;
+    isWeb = false;
+    type = HostPlatformType.io;
+    version = '1';
+  }
 }
