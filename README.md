@@ -75,6 +75,49 @@ Provides platform information such as:
     
   + isFuchsia  
   
+  + `when` method allowing to compose a complex condition  
+  
+  
+## platform.when  
+    
+Run functions that satisfy the current state of the platform.  
+You can use nested methods to compose more complex queries.  
+  
+##### Operating System  
+[fuchsia] - whether the operating system is a version of Fuchsia  
+[windows] - whether the operating system is a version of Windows  
+[android] - whether the operating system is a version of Android  
+[iOS] - whether the operating system is a version of iOS  
+[macOS] - whether the operating system is a version of MacOS  
+[linux] - whether the operating system is a version of Linux  
+[unknown] - operating system unknown  
+  
+##### Design  
+[material] - is material (Android, Fuchsia)  
+[cupertino] - is cupertino (macOS, iOS)  
+  
+##### Mobile or desktop  
+[mobile] - is mobile device (Android, iOS)  
+[desktop] - is desktop device (Windows, MacOS, Fuchsia)  
+  
+##### IO or Web  
+[web] - is web-based applications  
+[io] - is I/O supporting for non-web applications  
+  
+##### Build mode  
+[release] - release build mode  
+[profile] - profile build mode  
+[debug] - debug build mode  
+[orElse] - any callback was not called  
+  
+##### Sequence of checks
+1. Operating System
+2. Design
+3. Mobile/Desktop
+4. IO/Web
+5. Build mode
+6. Call [orElse] if any callback was not called  
+  
   
 ## For example  
   
@@ -86,6 +129,24 @@ void main(List<String> args) {
   print(Platform.instance.version);
   print(Platform.I.operatingSystem);
   print(platform.numberOfProcessors.gcd(1));
+
+  final string = platform.when(
+    io: () => platform.when(
+      fuchsia:   () => 'io fuchsia',
+      windows:   () => 'io windows',
+      android:   () => 'io android',
+      iOS:       () => 'io iOS',
+      macOS:     () => 'io macOS',
+      linux:     () => 'io linux',
+      unknown:   () => 'io unknown',
+    ),
+    web: () => platform.when(
+      material:  () => 'web Android or Fuchsia',
+      cupertino: () => 'web macOS or iOS',
+      orElse:    () => 'web Windows or Linux or unknown',
+    ),
+  );
+  print(string);
 }
 ```
   

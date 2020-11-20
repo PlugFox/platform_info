@@ -1,3 +1,8 @@
+## 2.2.0 - 2020-11-20  
+### Changed  
+- add when feature  
+   
+  
 ## 2.1.0 - 2020-10-18  
 ### Changed  
 - Fix `kListOSWithCupertinoDesign` constant and `isCupertino` flag  

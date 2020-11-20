@@ -3,6 +3,7 @@
 import 'base_host_platform.dart';
 import 'constants.dart';
 import 'enums.dart';
+import 'methods.dart';
 import 'stub_host_platform.dart'
     // ignore: uri_does_not_exist
     if (dart.library.html) 'web_host_platform.dart'
@@ -46,8 +47,7 @@ import 'stub_host_platform.dart'
 ///
 ///   + Is cupertino (MacOS, iOS)
 ///
-///
-class Platform implements ExtendedHostPlatform {
+class Platform extends ExtendedHostPlatform with PlatformMethods {
   @override
   HostPlatformType get type => _hostPlatform.type;
 

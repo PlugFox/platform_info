@@ -91,4 +91,147 @@ void main() {
       }, zoneValues: {#platform_info_test.isUnknownEnvironment: true});
     });
   });
+
+  group('PlatformMethods', () {
+    bool returnTrue() => true;
+    bool returnFalse() => false;
+
+    test('Operating System', () {
+      expect(
+          platform.when(
+            fuchsia: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isFuchsia);
+      expect(
+          platform.when(
+            windows: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isWindows);
+      expect(
+          platform.when(
+            android: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isAndroid);
+      expect(
+          platform.when(
+            iOS: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isIOS);
+      expect(
+          platform.when(
+            macOS: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isMacOS);
+      expect(
+          platform.when(
+            linux: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isLinux);
+      expect(
+          platform.when(
+            unknown: returnTrue,
+            orElse: returnFalse,
+          ),
+          !platform.isOperatingSystemKnown);
+    });
+
+    test('Design', () {
+      expect(
+          platform.when(
+            material: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isMaterial);
+      expect(
+          platform.when(
+            cupertino: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isCupertino);
+    });
+
+    test('Mobile/Desktop', () {
+      expect(
+          platform.when(
+            mobile: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isMobile);
+      expect(
+          platform.when(
+            desktop: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isDesktop);
+    });
+
+    test('IO or Web', () {
+      expect(
+          platform.when(
+            io: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isIO);
+      expect(
+          platform.when(
+            web: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.isWeb);
+    });
+
+    test('Build mode', () {
+      expect(
+          platform.when(
+            debug: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.buildMode == BuildMode.debug);
+      expect(
+          platform.when(
+            profile: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.buildMode == BuildMode.profile);
+      expect(
+          platform.when(
+            release: returnTrue,
+            orElse: returnFalse,
+          ),
+          platform.buildMode == BuildMode.release);
+    });
+
+    test('orElse', () {
+      expect(
+          platform.when(
+            orElse: returnTrue,
+          ),
+          isTrue);
+      expect(
+          platform.when(
+            orElse: returnFalse,
+          ),
+          isFalse);
+      expect(platform.when(), isNull);
+    });
+
+    test('Chaining', () {
+      expect(
+          platform.when(
+            io: () => platform.when(
+              material: returnTrue,
+              cupertino: returnTrue,
+              orElse: returnTrue,
+            ),
+            orElse: returnTrue,
+          ),
+          isTrue);
+    });
+  });
 }
