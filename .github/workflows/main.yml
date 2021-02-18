@@ -29,6 +29,6 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Check Code Coverage
-          uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
-          with:
-            path: packages/bloc_test/coverage/lcov.info
+        uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
+        with:
+          path: packages/bloc_test/coverage/lcov.info
