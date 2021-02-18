@@ -1,14 +1,14 @@
 name: platform_info
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ master, dev, feature/null_safety ]
   pull_request:
-    branches: [ master, dev ]
+    branches: [ master, dev, feature/null_safety ]
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: google/dart:latest
+      image: google/dart:beta
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependencies
@@ -27,5 +27,5 @@ jobs:
         uses: ChicagoFlutter/lcov-cop@v1.0.2
         with:
           path: coverage/lcov.info
-          min_coverage: 100
+          min_coverage: 95
           exclude: "**/*.g.dart"
