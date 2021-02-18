@@ -68,7 +68,7 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   int get numberOfProcessors => _hostPlatform.numberOfProcessors;
 
   @override
-  late final bool isOperatingSystemKnown;
+  final bool isOperatingSystemKnown;
 
   @override
   bool get isWeb => _hostPlatform.type == HostPlatformType.web;
@@ -77,16 +77,16 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   bool get isIO => _hostPlatform.type == HostPlatformType.io;
 
   @override
-  late final bool isMobile;
+  final bool isMobile;
 
   @override
-  late final bool isDesktop;
+  final bool isDesktop;
 
   @override
-  late final bool isMaterial;
+  final bool isMaterial;
 
   @override
-  late final bool isCupertino;
+  final bool isCupertino;
 
   @override
   bool get isAndroid => operatingSystem == OperatingSystem.android;
