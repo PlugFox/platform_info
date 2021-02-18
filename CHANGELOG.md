@@ -1,6 +1,11 @@
+## 3.0.0-nullsafety.0 - 2021-02-19
+### Changed  
+- Non nullable ready  
+  
+  
 ## 2.2.0 - 2020-11-20  
 ### Changed  
-- add when feature  
+- Add when feature  
    
   
 ## 2.1.0 - 2020-10-18  
