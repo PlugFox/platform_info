@@ -8,17 +8,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: google/dart:beta
+      image: google/dart:dev
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependencies
-        run: pub get
+        run: dart pub get
       - name: Format
-        run: dartfmt --dry-run --set-exit-if-changed lib
+        run: dart format --set-exit-if-changed none
       - name: Run analyzer
-        run: dartanalyzer --fatal-infos --fatal-warnings lib example test
+        run: dart analyze --fatal-infos --fatal-warnings .
       - name: Run tests
-        run: pub run test_coverage
+        run: dart run test_coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
