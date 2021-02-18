@@ -18,7 +18,7 @@ jobs:
       - name: Install Dependencies
         run: dart pub get
       - name: Check format
-        run: dart format --set-exit-if-changed none
+        run: dart format --set-exit-if-changed -l 80 -o none .
       - name: Check analyzer
         run: dart analyze --fatal-infos --fatal-warnings .
       - name: Run tests
