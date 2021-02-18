@@ -5,6 +5,7 @@ import 'enums.dart';
 mixin PlatformMethods on ExtendedHostPlatform {
   /// Run functions that satisfy the current state of the platform.
   /// You can use nested methods to compose more complex queries.
+  /// Can return null, if [orElse] not set and any callback was not called.
   ///
   /// ### Operating System
   /// [fuchsia] - whether the operating system is a version of Fuchsia
@@ -53,33 +54,35 @@ mixin PlatformMethods on ExtendedHostPlatform {
   ///      macOS:     () => ...,
   ///      linux:     () => ...,
   ///      unknown:   () => ...,
+  ///      orElse:    () => ...,
   ///    ),
   ///    web: () => platform.when(
   ///      material:  () => ...,
   ///      cupertino: () => ...,
   ///      orElse:    () => ...,
   ///    ),
+  ///    orElse: () => ...,
   ///  );
   /// ```
   ///
-  PlatformResult when<PlatformResult extends Object>({
-    PlatformResult Function() fuchsia,
-    PlatformResult Function() windows,
-    PlatformResult Function() android,
-    PlatformResult Function() iOS,
-    PlatformResult Function() macOS,
-    PlatformResult Function() linux,
-    PlatformResult Function() unknown,
-    PlatformResult Function() material,
-    PlatformResult Function() cupertino,
-    PlatformResult Function() mobile,
-    PlatformResult Function() desktop,
-    PlatformResult Function() io,
-    PlatformResult Function() web,
-    PlatformResult Function() release,
-    PlatformResult Function() profile,
-    PlatformResult Function() debug,
-    PlatformResult Function() orElse,
+  PlatformResult? when<PlatformResult>({
+    PlatformResult Function()? fuchsia,
+    PlatformResult Function()? windows,
+    PlatformResult Function()? android,
+    PlatformResult Function()? iOS,
+    PlatformResult Function()? macOS,
+    PlatformResult Function()? linux,
+    PlatformResult Function()? unknown,
+    PlatformResult Function()? material,
+    PlatformResult Function()? cupertino,
+    PlatformResult Function()? mobile,
+    PlatformResult Function()? desktop,
+    PlatformResult Function()? io,
+    PlatformResult Function()? web,
+    PlatformResult Function()? release,
+    PlatformResult Function()? profile,
+    PlatformResult Function()? debug,
+    PlatformResult Function()? orElse,
   }) {
     {
       // Operating System

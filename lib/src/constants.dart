@@ -1,6 +1,6 @@
 import 'base_host_platform.dart' show HostPlatform;
+import 'default_host_platform.dart';
 import 'enums.dart';
-import 'stub_host_platform.dart' show DefaultHostPlatform;
 
 /// List of all mobile phone operating systems
 const List<OperatingSystem> kListOSForMobile = <OperatingSystem>[
