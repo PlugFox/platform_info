@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart' show immutable;
+
 import 'base_host_platform.dart';
 import 'enums.dart';
 
@@ -5,6 +7,7 @@ import 'enums.dart';
 HostPlatform getHostPlatform() => const DefaultHostPlatform();
 
 /// Unknown host platform with default values
+@immutable
 class DefaultHostPlatform implements HostPlatform {
   /// Unknown host platform with default values
   const DefaultHostPlatform();

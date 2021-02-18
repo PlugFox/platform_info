@@ -13,7 +13,7 @@ class _IOHostPlatform implements HostPlatform {
   _IOHostPlatform._();
 
   static bool get _isUnknownEnvironment =>
-      Zone.current[#platform_info_test.isUnknownEnvironment] as bool ?? false;
+      Zone.current[#platform_info_test.isUnknownEnvironment] as bool? ?? false;
 
   static bool get _isKnownEnvironment => !_isUnknownEnvironment;
 
@@ -73,12 +73,12 @@ class _IOHostPlatform implements HostPlatform {
 
   static String _getLocale() {
     final lang = io.Platform.localeName
-        ?.split('-')
-        ?.first
-        ?.split('_')
-        ?.first
-        ?.trim()
-        ?.toLowerCase();
+        .split('-')
+        .first
+        .split('_')
+        .first
+        .trim()
+        .toLowerCase();
     if (_isUnknownEnvironment || lang is! String || lang.length != 2) {
       return kDefaultHostPlatform.locale;
     }

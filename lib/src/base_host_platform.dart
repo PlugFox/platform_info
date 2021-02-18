@@ -1,7 +1,10 @@
+import 'package:meta/meta.dart' show immutable;
+
 import 'enums.dart';
 
 /// Host platform
 /// contain info about host device
+@immutable
 abstract class HostPlatform {
   /// Host platform type
   ///  + io
