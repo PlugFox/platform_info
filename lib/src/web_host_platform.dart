@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:html' as html show window;
 
+import 'package:meta/meta.dart' show immutable;
+
 import 'base_host_platform.dart';
 import 'constants.dart';
 import 'enums.dart';
@@ -9,11 +11,12 @@ import 'enums.dart';
 HostPlatform getHostPlatform() => _WebHostPlatform._();
 
 /// Web based host platform
+@immutable
 class _WebHostPlatform implements HostPlatform {
   _WebHostPlatform._();
 
   static bool get _isUnknownEnvironment =>
-      Zone.current[#platform_info_test.isUnknownEnvironment] as bool ?? false;
+      Zone.current[#platform_info_test.isUnknownEnvironment] as bool? ?? false;
 
   static bool get _isKnownEnvironment => !_isUnknownEnvironment;
 
@@ -30,7 +33,7 @@ class _WebHostPlatform implements HostPlatform {
   final String locale = _getLocale();
 
   @override
-  int numberOfProcessors = _numberOfProcessors();
+  final int numberOfProcessors = _numberOfProcessors();
 
   static OperatingSystem _getOS() {
     if (_isKnownEnvironment) {
@@ -54,16 +57,18 @@ class _WebHostPlatform implements HostPlatform {
     return kDefaultHostPlatform.operatingSystem;
   }
 
-  static String _getVersion() => [
-        html.window?.navigator?.userAgent,
-        html.window?.navigator?.appVersion,
-        html.window?.navigator?.platform,
-      ].firstWhere((v) => _isKnownEnvironment && v is String && v.isNotEmpty,
-          orElse: () => kDefaultHostPlatform.version);
+  static String _getVersion() => <String>[
+        html.window.navigator.userAgent,
+        html.window.navigator.appVersion,
+        html.window.navigator.platform ?? '',
+      ].firstWhere(
+        (v) => _isKnownEnvironment && v is String && v.isNotEmpty,
+        orElse: () => kDefaultHostPlatform.version,
+      );
 
   static int _numberOfProcessors() {
     if (_isKnownEnvironment) {
-      final numberOfProcessors = html.window?.navigator?.hardwareConcurrency;
+      final numberOfProcessors = html.window.navigator.hardwareConcurrency;
       if (numberOfProcessors != null) {
         return numberOfProcessors;
       }
@@ -73,12 +78,12 @@ class _WebHostPlatform implements HostPlatform {
 
   static String _getLocale() {
     final lang = html.window.navigator.language
-        ?.split('-')
-        ?.first
-        ?.split('_')
-        ?.first
-        ?.trim()
-        ?.toLowerCase();
+        .split('-')
+        .first
+        .split('_')
+        .first
+        .trim()
+        .toLowerCase();
     if (_isUnknownEnvironment || lang is! String || lang.length != 2) {
       return kDefaultHostPlatform.locale;
     }

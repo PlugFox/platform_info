@@ -1,7 +1,10 @@
+import 'package:meta/meta.dart' show immutable;
+
 import 'enums.dart';
 
 /// Host platform
 /// contain info about host device
+@immutable
 abstract class HostPlatform {
   /// Host platform type
   ///  + io
@@ -28,7 +31,7 @@ abstract class HostPlatform {
 
   /// The number of individual execution units of the machine
   /// Returns 0 if unknown or not available
-  /// Use `.gcd(1)` if you need a quantity greater than 0
+  /// Use `.clamp(1, double.infinity)` if you need a quantity greater than 0
   int get numberOfProcessors;
 }
 

@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 
+import 'package:meta/meta.dart' show immutable;
+
 import 'base_host_platform.dart';
 import 'constants.dart';
+import 'default_host_platform.dart';
 import 'enums.dart';
 import 'methods.dart';
 import 'stub_host_platform.dart'
@@ -47,6 +50,7 @@ import 'stub_host_platform.dart'
 ///
 ///   + Is cupertino (MacOS, iOS)
 ///
+@immutable
 class Platform extends ExtendedHostPlatform with PlatformMethods {
   @override
   HostPlatformType get type => _hostPlatform.type;
@@ -64,8 +68,7 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   int get numberOfProcessors => _hostPlatform.numberOfProcessors;
 
   @override
-  bool get isOperatingSystemKnown => _isOperatingSystemKnown;
-  bool _isOperatingSystemKnown;
+  late final bool isOperatingSystemKnown;
 
   @override
   bool get isWeb => _hostPlatform.type == HostPlatformType.web;
@@ -74,20 +77,16 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   bool get isIO => _hostPlatform.type == HostPlatformType.io;
 
   @override
-  bool get isMobile => _isMobile;
-  bool _isMobile;
+  late final bool isMobile;
 
   @override
-  bool get isDesktop => _isDesktop;
-  bool _isDesktop;
+  late final bool isDesktop;
 
   @override
-  bool get isMaterial => _isMaterial;
-  bool _isMaterial;
+  late final bool isMaterial;
 
   @override
-  bool get isCupertino => _isCupertino;
-  bool _isCupertino;
+  late final bool isCupertino;
 
   @override
   bool get isAndroid => operatingSystem == OperatingSystem.android;
@@ -108,11 +107,9 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   bool get isWindows => operatingSystem == OperatingSystem.windows;
 
   @override
-  BuildMode get buildMode => _buildMode;
-  BuildMode _buildMode;
+  final BuildMode buildMode;
 
-  /// Host platform
-  /// contain info about host device
+  /// Host platform contain info about host device
   final HostPlatform _hostPlatform;
 
   static BuildMode _getCurrentBuildMode() => () {
@@ -136,18 +133,27 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   static Platform get I => _this;
 
   /// Singleton info about platform
-  static final Platform _this = Platform._internal();
-  Platform._internal()
-      : _hostPlatform = _getHostPlatform(),
-        _buildMode = _getCurrentBuildMode() {
-    _isOperatingSystemKnown = operatingSystem != OperatingSystem.unknown;
-    _isMobile = kListOSForMobile.contains(operatingSystem);
-    _isDesktop = kListOSForDesktop.contains(operatingSystem);
-    _isMaterial = kListOSWithMaterialDesign.contains(operatingSystem);
-    _isCupertino = kListOSWithCupertinoDesign.contains(operatingSystem);
-  }
+  static final Platform _this = Platform._internalFactoryFromEnvironment();
 
-  Platform._emptyForTest() : _hostPlatform = _getHostPlatform();
+  /// Internal factory from environment
+  factory Platform._internalFactoryFromEnvironment() => Platform._internal(
+        buildMode: _getCurrentBuildMode(),
+        hostPlatform: _getHostPlatform(),
+      );
+
+  /// Internal constructor
+  Platform._internal({
+    required this.buildMode,
+    required HostPlatform hostPlatform,
+  })   : _hostPlatform = hostPlatform,
+        isOperatingSystemKnown =
+            hostPlatform.operatingSystem != OperatingSystem.unknown,
+        isMobile = kListOSForMobile.contains(hostPlatform.operatingSystem),
+        isDesktop = kListOSForDesktop.contains(hostPlatform.operatingSystem),
+        isMaterial =
+            kListOSWithMaterialDesign.contains(hostPlatform.operatingSystem),
+        isCupertino =
+            kListOSWithCupertinoDesign.contains(hostPlatform.operatingSystem);
 
   @override
   int get hashCode => 0;
@@ -156,93 +162,58 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   bool operator ==(Object other) => other is Platform;
 
   @override
-  String toString() => version;
+  String toString() => '<Platform $version>';
 }
 
-/// Fake platform for test
-class FakePlatform extends Platform with PlatformMethods {
-  /// @nodoc
-  FakePlatform() : super._emptyForTest() {
-    reset();
-  }
+/// Fake class for test needs
+@immutable
+class FakePlatform extends Platform {
+  /// Fake constructor for test needs
+  FakePlatform({
+    BuildMode? buildMode,
+    HostPlatformType? type,
+    OperatingSystem? operatingSystem,
+    String? version,
+    String? locale,
+    int? numberOfProcessors,
+  }) : super._internal(
+          buildMode: buildMode ?? BuildMode.debug,
+          hostPlatform: _FakeHostPlatform(
+            type: type ?? const DefaultHostPlatform().type,
+            operatingSystem:
+                operatingSystem ?? const DefaultHostPlatform().operatingSystem,
+            version: version ?? const DefaultHostPlatform().version,
+            locale: locale ?? const DefaultHostPlatform().locale,
+            numberOfProcessors: numberOfProcessors ??
+                const DefaultHostPlatform().numberOfProcessors,
+          ),
+        );
+}
+
+/// Fake class for test needs
+@immutable
+class _FakeHostPlatform implements HostPlatform {
+  /// Fake constructor for test needs
+  const _FakeHostPlatform({
+    required this.locale,
+    required this.numberOfProcessors,
+    required this.operatingSystem,
+    required this.type,
+    required this.version,
+  });
 
   @override
-  BuildMode buildMode;
+  final String locale;
 
   @override
-  bool isAndroid;
+  final int numberOfProcessors;
 
   @override
-  bool isCupertino;
+  final OperatingSystem operatingSystem;
 
   @override
-  bool isDesktop;
+  final HostPlatformType type;
 
   @override
-  bool isFuchsia;
-
-  @override
-  bool isIO;
-
-  @override
-  bool isIOS;
-
-  @override
-  bool isLinux;
-
-  @override
-  bool isMacOS;
-
-  @override
-  bool isMaterial;
-
-  @override
-  bool isMobile;
-
-  @override
-  bool isOperatingSystemKnown;
-
-  @override
-  bool isWeb;
-
-  @override
-  bool isWindows;
-
-  @override
-  String locale;
-
-  @override
-  int numberOfProcessors;
-
-  @override
-  OperatingSystem operatingSystem;
-
-  @override
-  HostPlatformType type;
-
-  @override
-  String version;
-
-  /// @nodoc
-  void reset() {
-    buildMode = BuildMode.debug;
-    isFuchsia = false;
-    isWindows = false;
-    isAndroid = false;
-    isIOS = false;
-    isMacOS = false;
-    isLinux = true;
-    isMaterial = false;
-    isCupertino = false;
-    isMobile = false;
-    isDesktop = true;
-    locale = 'en';
-    numberOfProcessors = 1;
-    operatingSystem = OperatingSystem.linux;
-    isOperatingSystemKnown = true;
-    isIO = true;
-    isWeb = false;
-    type = HostPlatformType.io;
-    version = '1';
-  }
+  final String version;
 }
