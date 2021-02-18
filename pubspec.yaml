@@ -2,7 +2,7 @@ name: platform_info
 description: >
   Contains info about current platform
   such as Build mode and Operating system
-version: 3.0.0-nullsafety.0
+version: 3.0.0-nullsafety.1
 repository: https://github.com/PlugFox/platform_info/tree/master
 issue_tracker: https://github.com/PlugFox/platform_info/issues
 homepage: https://github.com/PlugFox/platform_info
