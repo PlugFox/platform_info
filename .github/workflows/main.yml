@@ -1,31 +1,34 @@
 name: platform_info
+
 on:
   push:
     branches: [ master, dev, feature/null_safety ]
   pull_request:
     branches: [ master, dev, feature/null_safety ]
+
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: /
     runs-on: ubuntu-latest
     container:
-      image: google/dart:dev
+      image: google/dart:2.12-dev
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependencies
         run: dart pub get
-      - name: Format
+      - name: Check format
         run: dart format --set-exit-if-changed none
-      - name: Run analyzer
+      - name: Check analyzer
         run: dart analyze --fatal-infos --fatal-warnings .
       - name: Run tests
-        run: dart run test_coverage
+        run: dart test --coverage=coverage && dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --packages=.packages --report-on=lib
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Check Code Coverage
-        uses: ChicagoFlutter/lcov-cop@v1.0.2
-        with:
-          path: coverage/lcov.info
-          min_coverage: 95
-          exclude: "**/*.g.dart"
+          uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
+          with:
+            path: packages/bloc_test/coverage/lcov.info
