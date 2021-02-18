@@ -4,6 +4,7 @@ import 'package:meta/meta.dart' show immutable;
 
 import 'base_host_platform.dart';
 import 'constants.dart';
+import 'default_host_platform.dart';
 import 'enums.dart';
 import 'methods.dart';
 import 'stub_host_platform.dart'
@@ -132,16 +133,27 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   static Platform get I => _this;
 
   /// Singleton info about platform
-  static final Platform _this = Platform._internal();
-  Platform._internal()
-      : _hostPlatform = _getHostPlatform(),
-        buildMode = _getCurrentBuildMode() {
-    isOperatingSystemKnown = operatingSystem != OperatingSystem.unknown;
-    isMobile = kListOSForMobile.contains(operatingSystem);
-    isDesktop = kListOSForDesktop.contains(operatingSystem);
-    isMaterial = kListOSWithMaterialDesign.contains(operatingSystem);
-    isCupertino = kListOSWithCupertinoDesign.contains(operatingSystem);
-  }
+  static final Platform _this = Platform._internalFactoryFromEnvironment();
+
+  /// Internal factory from environment
+  factory Platform._internalFactoryFromEnvironment() => Platform._internal(
+        buildMode: _getCurrentBuildMode(),
+        hostPlatform: _getHostPlatform(),
+      );
+
+  /// Internal constructor
+  Platform._internal({
+    required this.buildMode,
+    required HostPlatform hostPlatform,
+  })   : _hostPlatform = hostPlatform,
+        isOperatingSystemKnown =
+            hostPlatform.operatingSystem != OperatingSystem.unknown,
+        isMobile = kListOSForMobile.contains(hostPlatform.operatingSystem),
+        isDesktop = kListOSForDesktop.contains(hostPlatform.operatingSystem),
+        isMaterial =
+            kListOSWithMaterialDesign.contains(hostPlatform.operatingSystem),
+        isCupertino =
+            kListOSWithCupertinoDesign.contains(hostPlatform.operatingSystem);
 
   @override
   int get hashCode => 0;
@@ -151,4 +163,57 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
 
   @override
   String toString() => '<Platform $version>';
+}
+
+/// Fake class for test needs
+@immutable
+class FakePlatform extends Platform {
+  /// Fake constructor for test needs
+  FakePlatform({
+    BuildMode? buildMode,
+    HostPlatformType? type,
+    OperatingSystem? operatingSystem,
+    String? version,
+    String? locale,
+    int? numberOfProcessors,
+  }) : super._internal(
+          buildMode: buildMode ?? BuildMode.debug,
+          hostPlatform: _FakeHostPlatform(
+            type: type ?? const DefaultHostPlatform().type,
+            operatingSystem:
+                operatingSystem ?? const DefaultHostPlatform().operatingSystem,
+            version: version ?? const DefaultHostPlatform().version,
+            locale: locale ?? const DefaultHostPlatform().locale,
+            numberOfProcessors: numberOfProcessors ??
+                const DefaultHostPlatform().numberOfProcessors,
+          ),
+        );
+}
+
+/// Fake class for test needs
+@immutable
+class _FakeHostPlatform implements HostPlatform {
+  /// Fake constructor for test needs
+  const _FakeHostPlatform({
+    required this.locale,
+    required this.numberOfProcessors,
+    required this.operatingSystem,
+    required this.type,
+    required this.version,
+  });
+
+  @override
+  final String locale;
+
+  @override
+  final int numberOfProcessors;
+
+  @override
+  final OperatingSystem operatingSystem;
+
+  @override
+  final HostPlatformType type;
+
+  @override
+  final String version;
 }

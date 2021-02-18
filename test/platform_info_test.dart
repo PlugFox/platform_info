@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:platform_info/platform_info.dart';
+import 'package:platform_info/src/default_host_platform.dart';
+import 'package:platform_info/src/enums.dart';
 import 'package:platform_info/src/io_host_platform.dart' as io;
 import 'package:platform_info/src/stub_host_platform.dart' as stub;
 import 'package:test/test.dart';
@@ -67,10 +69,10 @@ void main() {
       final stubPlatform = stub.getHostPlatform();
       const type =
           identical(0, 0.0) ? HostPlatformType.web : HostPlatformType.io;
-      expect(() => const stub.DefaultHostPlatform(), returnsNormally);
-      // ignore: prefer_const_constructors
-      expect(() => stub.DefaultHostPlatform(), returnsNormally);
-      expect(stubPlatform, const stub.DefaultHostPlatform());
+      expect(() => const DefaultHostPlatform(), returnsNormally);
+      // ignore: prefer_const_constructors, non_const_call_to_literal_constructor
+      expect(() => DefaultHostPlatform(), returnsNormally);
+      expect(stubPlatform, const DefaultHostPlatform());
       expect(stubPlatform.operatingSystem, OperatingSystem.unknown);
       expect(stubPlatform.numberOfProcessors, 0);
       expect(stubPlatform.locale, 'en');
@@ -99,8 +101,6 @@ void main() {
     bool returnTrue() => true;
     bool returnFalse() => false;
 
-    setUpAll(() {});
-
     test('Chaining', () {
       expect(
           platform.when(
@@ -112,6 +112,179 @@ void main() {
             orElse: returnFalse,
           ),
           isTrue);
+    });
+
+    test('Operating System', () {
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.fuchsia,
+          ).when(
+            fuchsia: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.windows,
+          ).when(
+            windows: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.android,
+          ).when(
+            android: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.iOS,
+          ).when(
+            iOS: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.macOS,
+          ).when(
+            macOS: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.linux,
+          ).when(
+            linux: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.unknown,
+          ).when(
+            unknown: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+    });
+
+    test('Design', () {
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.android,
+          ).when(
+            material: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.iOS,
+          ).when(
+            cupertino: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+    });
+
+    test('Mobile/Desktop', () {
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.android,
+          ).when(
+            mobile: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            operatingSystem: OperatingSystem.windows,
+          ).when(
+            desktop: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+    });
+
+    test('IO or Web', () {
+      expect(
+          FakePlatform(
+            type: HostPlatformType.io,
+          ).when(
+            io: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            type: HostPlatformType.web,
+          ).when(
+            web: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+    });
+
+    test('Build mode', () {
+      expect(
+          FakePlatform(
+            buildMode: BuildMode.debug,
+          ).when(
+            debug: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            buildMode: BuildMode.profile,
+          ).when(
+            profile: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform(
+            buildMode: BuildMode.release,
+          ).when(
+            release: returnTrue,
+            orElse: returnFalse,
+          ),
+          isTrue);
+    });
+
+    test('orElse', () {
+      expect(
+          FakePlatform().when(
+            orElse: returnTrue,
+          ),
+          isTrue);
+
+      expect(
+          FakePlatform().when(
+            orElse: returnFalse,
+          ),
+          isFalse);
+
+      expect(
+        FakePlatform().when<Object>(),
+        isNull,
+      );
     });
   });
 }

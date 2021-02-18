@@ -53,20 +53,14 @@ class _IOHostPlatform implements HostPlatform {
 
   static String _getVersion() {
     if (_isKnownEnvironment) {
-      final operatingSystemVersion = io.Platform?.operatingSystemVersion;
-      if (operatingSystemVersion != null) {
-        return operatingSystemVersion;
-      }
+      return io.Platform.operatingSystemVersion;
     }
     return kDefaultHostPlatform.version;
   }
 
   static int _numberOfProcessors() {
     if (_isKnownEnvironment) {
-      final numberOfProcessors = io.Platform?.numberOfProcessors;
-      if (numberOfProcessors != null) {
-        return numberOfProcessors;
-      }
+      return io.Platform.numberOfProcessors;
     }
     return kDefaultHostPlatform.numberOfProcessors;
   }
