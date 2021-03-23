@@ -1,3 +1,7 @@
+## 3.0.0-nullsafety.2 - 2021-03-24  
+### Added  
+- Add some badges   
+
 ## 3.0.0-nullsafety.1 - 2021-02-19
 ### Changed  
 - Non nullable ready  
