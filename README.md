@@ -5,8 +5,13 @@
 [![Actions Status](https://github.com/PlugFox/platform_info/workflows/platform_info/badge.svg)](https://github.com/PlugFox/platform_info/actions)
 [![Coverage](https://codecov.io/gh/PlugFox/platform_info/branch/master/graph/badge.svg)](https://codecov.io/gh/PlugFox/platform_info)
 [![Pub](https://img.shields.io/pub/v/platform_info.svg)](https://pub.dev/packages/platform_info)
+[![Likes](https://img.shields.io/badge/dynamic/json?color=blue&label=likes&query=likes&url=http://www.pubscore.gq/likes?package=platform_info&style=flat-square&cacheSeconds=90000)](https://pub.dev/packages/platform_info)
+[![Health](https://img.shields.io/badge/dynamic/json?color=blue&label=health&query=pub_points&url=http://www.pubscore.gq/pub-points?package=platform_info&style=flat-square&cacheSeconds=90000)](https://pub.dev/packages/platform_info/score)
+[![Code size](https://img.shields.io/github/languages/code-size/plugfox/platform_info?logo=github&logoColor=white)](https://github.com/plugfox/platform_info)
 [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](https://en.wikipedia.org/wiki/WTFPL)
 [![effective_dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/tenhobi/effective_dart)
+[![GitHub stars](https://img.shields.io/github/stars/PlugFox/platform_info?style=social)](https://github.com/PlugFox/platform_info/)
+ 
   
   
 ## About  
@@ -49,9 +54,9 @@ Provides platform information such as:
     
   + The number of individual execution units of the machine (`0` if not available)  
     
-  + Operating system is known type  
+  + Operating system is a known type  
   
-  + Is a web-based applications  
+  + Is a Web-based applications  
   
   + Is a I/O supporting for non-web applications  
   
@@ -59,21 +64,21 @@ Provides platform information such as:
     
   + Is a desktop device (Windows, macOS, Fuchsia)  
     
-  + Is material design device (Android, Fuchsia)  
+  + Is Material design device (Android, Fuchsia)  
     
-  + Is cupertino design device (macOS, iOS)  
+  + Is Cupertino design device (macOS, iOS)  
     
-  + isLinux  
+  + is Linux  
     
-  + isMacOS  
+  + is macOS  
     
-  + isWindows  
+  + is Windows  
     
-  + isAndroid  
+  + is android  
     
-  + isIOS  
+  + is iOS  
     
-  + isFuchsia  
+  + is fuchsia  
   
   + `when` method allowing to compose a complex condition  
   
