@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 
-import 'package:meta/meta.dart' show immutable;
+import 'package:meta/meta.dart' show immutable, visibleForTesting;
 
 import 'base_host_platform.dart';
 import 'constants.dart';
@@ -167,6 +167,7 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
 
 /// Fake class for test needs
 @immutable
+@visibleForTesting
 class FakePlatform extends Platform {
   /// Fake constructor for test needs
   FakePlatform({
