@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'dart:html' as html show window;
 
-import 'package:meta/meta.dart' show immutable;
+import 'package:meta/meta.dart' show immutable, internal;
 
 import 'base_host_platform.dart';
 import 'constants.dart';
 import 'enums.dart';
 
 /// Get host platform if dart.library.html available
+@internal
 HostPlatform getHostPlatform() => _WebHostPlatform._();
 
 /// Web based host platform
