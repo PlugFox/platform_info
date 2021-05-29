@@ -1,10 +1,10 @@
 name: platform_info
 
-#on:
-#  push:
-#    branches: [ master, dev, feature/null_safety ]
-#  pull_request:
-#    branches: [ master, dev, feature/null_safety ]
+on:
+  push:
+    branches: [ master, dev, feature/** ]
+  pull_request:
+    branches: [ master, dev, feature/** ]
 
 jobs:
   build:
