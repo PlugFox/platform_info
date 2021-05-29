@@ -1,3 +1,7 @@
+## 3.1.0 - 2021-05-29 
+### Added  
+- Extensions for enums BuildMode, HostPlatformType, OperatingSystem
+
 ## 3.0.0 - 2021-03-27 
 ### Changed  
 - Non nullable ready  
