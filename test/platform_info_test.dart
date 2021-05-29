@@ -287,4 +287,132 @@ void main() {
       );
     });
   });
+
+  group('Enum extensions', () {
+    test('BuildMode', () {
+      expect(BuildMode.release.isRelease, isTrue);
+      expect(BuildMode.profile.isProfile, isTrue);
+      expect(BuildMode.debug.isDebug, isTrue);
+      expect(
+        BuildMode.release.maybeWhen(
+          orElse: () => false,
+          debug: () => false,
+          profile: () => false,
+          release: () => true,
+        ),
+        isTrue,
+      );
+      expect(
+        BuildMode.profile.maybeWhen(
+          orElse: () => false,
+          debug: () => false,
+          profile: () => true,
+          release: () => false,
+        ),
+        isTrue,
+      );
+      expect(
+        BuildMode.debug.maybeWhen(
+          orElse: () => false,
+          debug: () => true,
+          profile: () => false,
+          release: () => false,
+        ),
+        isTrue,
+      );
+      expect(
+        BuildMode.debug.maybeWhen(
+          orElse: () => true,
+          release: () => false,
+          profile: () => false,
+        ),
+        isTrue,
+      );
+    });
+
+    test('HostPlatformType', () {
+      expect(HostPlatformType.io.isIO, isTrue);
+      expect(HostPlatformType.web.isWeb, isTrue);
+      expect(
+        HostPlatformType.io.when(
+          io: () => true,
+          web: () => false,
+        ),
+        isTrue,
+      );
+      expect(
+        HostPlatformType.web.when(
+          io: () => false,
+          web: () => true,
+        ),
+        isTrue,
+      );
+    });
+
+    test('OperatingSystem', () {
+      expect(OperatingSystem.fuchsia.isFuchsia, isTrue);
+      expect(OperatingSystem.unknown.isUnknown, isTrue);
+      expect(OperatingSystem.android.isAndroid, isTrue);
+      expect(OperatingSystem.iOS.isIOS, isTrue);
+      expect(OperatingSystem.linux.isLinux, isTrue);
+      expect(OperatingSystem.macOS.isMacOS, isTrue);
+      expect(OperatingSystem.windows.isWindows, isTrue);
+
+      expect(
+        OperatingSystem.fuchsia.maybeWhen(
+          fuchsia: () => true,
+          orElse: () => false,
+        ),
+        isTrue,
+      );
+
+      expect(
+        OperatingSystem.windows.maybeWhen(
+          windows: () => true,
+          orElse: () => false,
+        ),
+        isTrue,
+      );
+
+      expect(
+        OperatingSystem.macOS.maybeWhen(
+          macOS: () => true,
+          orElse: () => false,
+        ),
+        isTrue,
+      );
+
+      expect(
+        OperatingSystem.linux.maybeWhen(
+          linux: () => true,
+          orElse: () => false,
+        ),
+        isTrue,
+      );
+
+      expect(
+        OperatingSystem.iOS.maybeWhen(
+          iOS: () => true,
+          orElse: () => false,
+        ),
+        isTrue,
+      );
+
+      expect(
+        OperatingSystem.android.maybeWhen(
+          android: () => true,
+          orElse: () => false,
+        ),
+        isTrue,
+      );
+
+      expect(
+        OperatingSystem.unknown.maybeWhen(
+          fuchsia: () => false,
+          orElse: () => true,
+        ),
+        isTrue,
+      );
+    });
+  });
 }

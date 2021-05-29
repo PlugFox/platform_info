@@ -145,7 +145,7 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
   Platform._internal({
     required this.buildMode,
     required HostPlatform hostPlatform,
-  })   : _hostPlatform = hostPlatform,
+  })  : _hostPlatform = hostPlatform,
         isOperatingSystemKnown =
             hostPlatform.operatingSystem != OperatingSystem.unknown,
         isMobile = kListOSForMobile.contains(hostPlatform.operatingSystem),
