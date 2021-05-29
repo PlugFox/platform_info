@@ -1,10 +1,10 @@
 name: platform_info
 
-on:
-  push:
-    branches: [ master, dev, feature/null_safety ]
-  pull_request:
-    branches: [ master, dev, feature/null_safety ]
+#on:
+#  push:
+#    branches: [ master, dev, feature/null_safety ]
+#  pull_request:
+#    branches: [ master, dev, feature/null_safety ]
 
 jobs:
   build:
@@ -22,7 +22,10 @@ jobs:
       - name: Check analyzer
         run: dart analyze --fatal-infos --fatal-warnings .
       - name: Run tests
-        run: dart test --coverage=coverage && dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --packages=.packages --report-on=lib
+        run: |
+          dart test --coverage=coverage
+          && dart run coverage:format_coverage --lcov --in=coverage \
+            --out=coverage/lcov.info --packages=.packages --report-on=lib
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
