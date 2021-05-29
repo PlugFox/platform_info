@@ -23,8 +23,8 @@ jobs:
         run: dart analyze --fatal-infos --fatal-warnings .
       - name: Run tests
         run: |
-          dart test --coverage=coverage
-          && dart run coverage:format_coverage --lcov --in=coverage \
+          dart test --coverage=coverage \
+            && dart run coverage:format_coverage --lcov --in=coverage \
             --out=coverage/lcov.info --packages=.packages --report-on=lib
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
