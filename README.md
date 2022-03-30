@@ -4,11 +4,8 @@
   
 [![Actions Status](https://github.com/PlugFox/platform_info/workflows/platform_info/badge.svg)](https://github.com/PlugFox/platform_info/actions)
 [![Coverage](https://codecov.io/gh/PlugFox/platform_info/branch/master/graph/badge.svg)](https://codecov.io/gh/PlugFox/platform_info)
-[![Pub](https://img.shields.io/pub/v/platform_info.svg)](https://pub.dev/packages/platform_info)
-[![Code size](https://img.shields.io/github/languages/code-size/plugfox/platform_info?logo=github&logoColor=white)](https://github.com/plugfox/platform_info)
 [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](https://en.wikipedia.org/wiki/WTFPL)
-[![effective_dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/tenhobi/effective_dart)
-[![GitHub stars](https://img.shields.io/github/stars/PlugFox/platform_info?style=social)](https://github.com/PlugFox/platform_info/)
+[![Linter](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/tenhobi/effective_dart)
  
   
   
