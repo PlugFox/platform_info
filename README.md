@@ -3,7 +3,7 @@
 [![](https://github.com/PlugFox/platform_info/raw/master/.img/logo.png)](https://github.com/PlugFox/platform_info)  
   
 [![platform_info](https://img.shields.io/pub/v/platform_info.svg)](https://pub.dev/packages/platform_info)
-[![Actions Status](https://github.com/PlugFox/platform_info/workflows/platform_info/badge.svg)](https://github.com/PlugFox/platform_info/actions)
+[![Actions Status](https://github.com/PlugFox/platform_info/actions/workflows/main.yml/badge.svg)](https://github.com/PlugFox/platform_info/actions)
 [![Coverage](https://codecov.io/gh/PlugFox/platform_info/branch/master/graph/badge.svg)](https://codecov.io/gh/PlugFox/platform_info)
 [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](https://en.wikipedia.org/wiki/WTFPL)
 [![Linter](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/tenhobi/effective_dart)
