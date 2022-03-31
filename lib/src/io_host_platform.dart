@@ -73,7 +73,7 @@ class _IOHostPlatform implements HostPlatform {
         .first
         .trim()
         .toLowerCase();
-    if (_isUnknownEnvironment || lang is! String || lang.length != 2) {
+    if (_isUnknownEnvironment || lang.length != 2) {
       return kDefaultHostPlatform.locale;
     }
     return lang;

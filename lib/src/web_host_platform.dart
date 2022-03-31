@@ -63,7 +63,7 @@ class _WebHostPlatform implements HostPlatform {
         html.window.navigator.appVersion,
         html.window.navigator.platform ?? '',
       ].firstWhere(
-        (v) => _isKnownEnvironment && v is String && v.isNotEmpty,
+        (v) => _isKnownEnvironment && v.isNotEmpty,
         orElse: () => kDefaultHostPlatform.version,
       );
 
@@ -85,7 +85,7 @@ class _WebHostPlatform implements HostPlatform {
         .first
         .trim()
         .toLowerCase();
-    if (_isUnknownEnvironment || lang is! String || lang.length != 2) {
+    if (_isUnknownEnvironment || lang.length != 2) {
       return kDefaultHostPlatform.locale;
     }
     return lang;
