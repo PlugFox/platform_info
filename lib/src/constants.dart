@@ -25,6 +25,7 @@ const List<OperatingSystem> kListOSForDesktop = <OperatingSystem>[
   OperatingSystem.windows,
   OperatingSystem.macOS,
   OperatingSystem.fuchsia,
+  OperatingSystem.linux,
 ];
 
 /// Unknown host platform with default values
