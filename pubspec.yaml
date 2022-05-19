@@ -2,7 +2,7 @@ name: platform_info
 description: >
   Contains info about current platform
   such as Build mode and Operating system.
-version: 3.1.0
+version: 3.2.0
 repository: https://github.com/PlugFox/platform_info/tree/master
 issue_tracker: https://github.com/PlugFox/platform_info/issues
 homepage: https://github.com/PlugFox/platform_info

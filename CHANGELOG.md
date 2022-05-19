@@ -1,3 +1,7 @@
+## 3.2.0 - 2022-06-19 
+### Fixed  
+- Linux is desktop platform now
+
 ## 3.1.0 - 2021-05-29 
 ### Added  
 - Extensions for enums BuildMode, HostPlatformType, OperatingSystem
