@@ -1,4 +1,4 @@
-## 3.2.0 - 2022-06-19 
+## 3.2.0 - 2022-05-19  
 ### Fixed  
 - Linux is desktop platform now
 
