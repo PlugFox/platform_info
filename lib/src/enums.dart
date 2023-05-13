@@ -4,17 +4,17 @@
 ///  + debug   - Debug build mode
 enum BuildMode {
   /// Release build mode
-  release,
+  release(),
 
   /// Profile build mode
-  profile,
+  profile(),
 
   /// Debug build mode
-  debug
-}
+  debug();
 
-/// Build mode extension
-extension BuildModeX on BuildMode {
+  /// Build mode enum
+  const BuildMode();
+
   /// Is release build mode
   bool get isRelease => this == BuildMode.release;
 
@@ -61,14 +61,14 @@ extension BuildModeX on BuildMode {
 ///  + web (html, js, browser)
 enum HostPlatformType {
   /// IO (desktops, mobile, console)
-  io,
+  io(),
 
   /// Web (browser)
-  web,
-}
+  web();
 
-/// Host platform extension
-extension HostPlatformTypeX on HostPlatformType {
+  /// Host platform type
+  const HostPlatformType();
+
   /// Is I/O (vm, desktops, mobile, console)
   bool get isIO => this == HostPlatformType.io;
 
@@ -93,29 +93,32 @@ extension HostPlatformTypeX on HostPlatformType {
 ///  + Unknown
 enum OperatingSystem {
   /// Unknown
-  unknown,
+  unknown('Unknown'),
 
   /// Windows
-  windows,
+  windows('Windows'),
 
   /// Linux
-  linux,
+  linux('Linux'),
 
   /// MacOS
-  macOS,
+  macOS('macOS'),
 
   /// iOS
-  iOS,
+  iOS('iOS'),
 
   /// Android
-  android,
+  android('Android'),
 
   /// Fuchsia
-  fuchsia,
-}
+  fuchsia('Fuchsia');
 
-/// Operation system extension
-extension OperatingSystemX on OperatingSystem {
+  /// Operation system
+  const OperatingSystem(this.name);
+
+  /// Operation system name
+  final String name;
+
   /// Android
   bool get isAndroid => this == OperatingSystem.android;
 

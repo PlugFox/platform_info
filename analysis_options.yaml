@@ -2,7 +2,7 @@
 # https://dart.dev/guides/language/analysis-options/
 # https://dart-lang.github.io/linter/lints/
 
-#include: package:pedantic/analysis_options.1.9.0.yaml
+include: package:lints/recommended.yaml
 
 analyzer:
   exclude:
@@ -20,9 +20,11 @@ analyzer:
     # Coverage
     - 'test/.test_coverage.dart'
 
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
+  # Enable the following options to enable strong mode.
+  language:
+    strict-casts: true
+    strict-raw-types: true
+    strict-inference: true
 
   #enable-experiment:
   #  - non-nullable
@@ -92,7 +94,6 @@ linter:
     close_sinks: true
     control_flow_in_finally: true
     empty_statements: true
-    invariant_booleans: true
     iterable_contains_unrelated_type: true
     join_return_with_assignment: true
     leading_newlines_in_multiline_strings: true
@@ -169,7 +170,6 @@ linter:
     prefer_collection_literals: true
     prefer_conditional_assignment: true
     prefer_contains: true
-    prefer_equal_for_default_values: true
     prefer_final_fields: true
     prefer_for_elements_to_map_fromIterable: true
     prefer_generic_function_type_aliases: true

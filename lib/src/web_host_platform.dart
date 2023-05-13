@@ -9,12 +9,12 @@ import 'enums.dart';
 
 /// Get host platform if dart.library.html available
 @internal
-HostPlatform getHostPlatform() => _WebHostPlatform._();
+HostPlatform getHostPlatform() => _HostPlatform$Web._();
 
 /// Web based host platform
 @immutable
-class _WebHostPlatform implements HostPlatform {
-  _WebHostPlatform._();
+final class _HostPlatform$Web extends HostPlatform {
+  _HostPlatform$Web._();
 
   static bool get _isUnknownEnvironment =>
       Zone.current[#platform_info_test.isUnknownEnvironment] as bool? ?? false;

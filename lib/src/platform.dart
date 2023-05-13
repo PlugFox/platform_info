@@ -51,7 +51,7 @@ import 'stub_host_platform.dart'
 ///   + Is cupertino (MacOS, iOS)
 ///
 @immutable
-class Platform extends ExtendedHostPlatform with PlatformMethods {
+final class Platform extends ExtendedHostPlatform with PlatformMethods {
   @override
   HostPlatformType get type => _hostPlatform.type;
 
@@ -168,7 +168,7 @@ class Platform extends ExtendedHostPlatform with PlatformMethods {
 /// Fake class for test needs
 @immutable
 @visibleForTesting
-class FakePlatform extends Platform {
+final class FakePlatform extends Platform {
   /// Fake constructor for test needs
   FakePlatform({
     BuildMode? buildMode,
@@ -193,7 +193,7 @@ class FakePlatform extends Platform {
 
 /// Fake class for test needs
 @immutable
-class _FakeHostPlatform implements HostPlatform {
+final class _FakeHostPlatform extends HostPlatform {
   /// Fake constructor for test needs
   const _FakeHostPlatform({
     required this.locale,

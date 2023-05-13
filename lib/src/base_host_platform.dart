@@ -5,11 +5,14 @@ import 'enums.dart';
 /// Host platform
 /// contain info about host device
 @immutable
-abstract class HostPlatform {
+abstract base class HostPlatform {
+  /// {@nodoc}
+  const HostPlatform();
+
   /// Host platform type
   ///  + io
   ///  + web
-  HostPlatformType get type;
+  abstract final HostPlatformType type;
 
   /// Operation system
   ///  + Fuchsia
@@ -19,44 +22,47 @@ abstract class HostPlatform {
   ///  + iOS
   ///  + Android
   ///  + Unknown
-  OperatingSystem get operatingSystem;
+  abstract final OperatingSystem operatingSystem;
 
   /// Version
   ///  in i/o - operating system version
   ///  in Web - user agent string
-  String get version;
+  abstract final String version;
 
   /// Locale string
-  String get locale;
+  abstract final String locale;
 
   /// The number of individual execution units of the machine
   /// Returns 0 if unknown or not available
   /// Use `.clamp(1, double.infinity)` if you need a quantity greater than 0
-  int get numberOfProcessors;
+  abstract final int numberOfProcessors;
 }
 
 /// Extended host platform
-abstract class ExtendedHostPlatform implements HostPlatform {
+abstract base class ExtendedHostPlatform extends HostPlatform {
+  /// {@nodoc}
+  const ExtendedHostPlatform();
+
   /// Is web-based applications
-  bool get isWeb;
+  abstract final bool isWeb;
 
   /// Is I/O supporting for non-web applications
-  bool get isIO;
+  abstract final bool isIO;
 
   /// Operating system is known type
-  bool get isOperatingSystemKnown;
+  abstract final bool isOperatingSystemKnown;
 
   /// Is mobile device (Android, iOS)
-  bool get isMobile;
+  abstract final bool isMobile;
 
   /// Is desktop device (Windows, MacOS, Fuchsia)
-  bool get isDesktop;
+  abstract final bool isDesktop;
 
   /// Is material (Android, Fuchsia)
-  bool get isMaterial;
+  abstract final bool isMaterial;
 
   /// Is cupertino (MacOS, iOS)
-  bool get isCupertino;
+  abstract final bool isCupertino;
 
   /// Whether the operating system is a version of
   /// [Linux](https://en.wikipedia.org/wiki/Linux)
@@ -64,31 +70,31 @@ abstract class ExtendedHostPlatform implements HostPlatform {
   /// This value is `false` if the operating system is a specialized
   /// version of Linux that identifies itself by a different name,
   /// for example Android (see [isAndroid])
-  bool get isLinux;
+  abstract final bool isLinux;
 
   /// Whether the operating system is a version of
   /// [macOS](https://en.wikipedia.org/wiki/MacOS)
-  bool get isMacOS;
+  abstract final bool isMacOS;
 
   /// Whether the operating system is a version of
   /// [Microsoft Windows](https://en.wikipedia.org/wiki/Microsoft_Windows).
-  bool get isWindows;
+  abstract final bool isWindows;
 
   /// Whether the operating system is a version of
   /// [Android](https://en.wikipedia.org/wiki/Android_%28operating_system%29)
-  bool get isAndroid;
+  abstract final bool isAndroid;
 
   /// Whether the operating system is a version of
   /// [iOS](https://en.wikipedia.org/wiki/IOS)
-  bool get isIOS;
+  abstract final bool isIOS;
 
   /// Whether the operating system is a version of
   /// [Fuchsia](https://en.wikipedia.org/wiki/Google_Fuchsia)
-  bool get isFuchsia;
+  abstract final bool isFuchsia;
 
   /// Build mode
   ///  + release - Release build mode
   ///  + profile - Profile build mode
   ///  + debug   - Debug build mode
-  BuildMode get buildMode;
+  abstract final BuildMode buildMode;
 }

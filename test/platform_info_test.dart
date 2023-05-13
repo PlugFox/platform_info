@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:platform_info/platform_info.dart';
 import 'package:platform_info/src/default_host_platform.dart';
-import 'package:platform_info/src/io_host_platform.dart' as io;
 import 'package:platform_info/src/stub_host_platform.dart' as stub;
 import 'package:test/test.dart';
 
@@ -86,20 +85,29 @@ void main() {
     });
   });
 
-  group('io platform test', () {
+  group('platform test', () {
     test('unknown environment', () {
       runZoned(
         () {
-          final ioPlatform = io.getHostPlatform();
-          expect(ioPlatform.operatingSystem, OperatingSystem.unknown);
-          expect(ioPlatform.numberOfProcessors, 0);
-          expect(ioPlatform.locale, 'en');
-          expect(ioPlatform.version, '<unknown>');
-          expect(ioPlatform.type, HostPlatformType.io);
+          final platform = DefaultHostPlatform();
+          expect(platform.operatingSystem, OperatingSystem.unknown);
+          expect(platform.numberOfProcessors, 0);
+          expect(platform.locale, 'en');
+          expect(platform.version, '<unknown>');
+          expect(
+              platform.type,
+              anyOf(
+                HostPlatformType.io,
+                HostPlatformType.web,
+              ));
         },
         zoneValues: {#platform_info_test.isUnknownEnvironment: true},
       );
     });
+  }, onPlatform: {
+    'android': Timeout.factor(2),
+    'ios': Timeout.factor(2),
+    /* 'browser': const Skip('Not supported on Browser'), */
   });
 
   group('PlatformMethods', () {
@@ -108,12 +116,13 @@ void main() {
 
     test('Chaining', () {
       expect(
-          platform.when(
-            io: () => platform.when(
+          platform.when<bool?>(
+            io: () => platform.when<bool>(
               material: returnTrue,
               cupertino: returnTrue,
               orElse: returnTrue,
             ),
+            web: returnTrue,
             orElse: returnFalse,
           ),
           isTrue);
