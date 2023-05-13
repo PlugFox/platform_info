@@ -6,11 +6,11 @@ import 'constants.dart';
 import 'enums.dart';
 
 /// Get host platform if dart.library.io available
-HostPlatform getHostPlatform() => _IOHostPlatform._();
+HostPlatform getHostPlatform() => _HostPlatform$IO._();
 
 /// i/o based host platform
-class _IOHostPlatform implements HostPlatform {
-  _IOHostPlatform._();
+final class _HostPlatform$IO extends HostPlatform {
+  _HostPlatform$IO._();
 
   static bool get _isUnknownEnvironment =>
       Zone.current[#platform_info_test.isUnknownEnvironment] as bool? ?? false;

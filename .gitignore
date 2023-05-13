@@ -19,4 +19,8 @@ doc
 pubspec.lock
 coverage*
 
+# Test
+.coverage/
+/test/**/*.json
 /test/.test_coverage.dart
+log.pana.json

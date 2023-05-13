@@ -2,7 +2,7 @@ import 'base_host_platform.dart';
 import 'enums.dart';
 
 /// Mixin with methods that extend the functionality of the platform
-mixin PlatformMethods on ExtendedHostPlatform {
+base mixin PlatformMethods on ExtendedHostPlatform {
   /// Run functions that satisfy the current state of the platform.
   /// You can use nested methods to compose more complex queries.
   /// Can return null, if [orElse] not set and any callback was not called.

@@ -5,7 +5,7 @@ import 'enums.dart';
 
 /// Unknown host platform with default values
 @immutable
-class DefaultHostPlatform implements HostPlatform {
+final class DefaultHostPlatform extends HostPlatform {
   /// Unknown host platform with default values
   @literal
   const DefaultHostPlatform();
