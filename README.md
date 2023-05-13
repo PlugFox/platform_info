@@ -169,6 +169,6 @@ Refer to the [Changelog](https://github.com/plugfox/platform_info/blob/master/CH
   
 ## License  
   
-[WTFPL](https://github.com/plugfox/platform_info/blob/master/LICENSE)  
+[MIT](https://opensource.org/licenses/MIT)  
   
   
