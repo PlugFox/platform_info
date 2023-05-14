@@ -158,16 +158,28 @@ void main(List<String> args) {
 
 ## Coverage
 
-[![](https://codecov.io/gh/PlugFox/platform_info/branch/dev/graphs/sunburst.svg)](https://codecov.io/gh/PlugFox/platform_info/branch/master)
+[![](https://codecov.io/gh/PlugFox/platform_info/branch/master/graphs/sunburst.svg)](https://codecov.io/gh/PlugFox/platform_info/branch/master)
+
+---
 
 ## Changelog
 
 Refer to the [Changelog](https://github.com/plugfox/platform_info/blob/master/CHANGELOG.md) to get all release notes.
 
+---
+
 ## Maintainers
 
 [Plague Fox](https://plugfox.dev)
 
+---
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
+
+---
+
+## Tags
+
+cross, platform, info
