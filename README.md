@@ -1,12 +1,11 @@
 # platform_info
 
-[![](https://github.com/PlugFox/platform_info/raw/master/.img/logo.png)](https://github.com/PlugFox/platform_info)
-
 [![platform_info](https://img.shields.io/pub/v/platform_info.svg)](https://pub.dev/packages/platform_info)
-[![Actions Status](https://github.com/PlugFox/platform_info/actions/workflows/checkout.yml/badge.svg)](https://github.com/PlugFox/platform_info/actions)
+[![Checkout](https://github.com/PlugFox/platform_info/actions/workflows/checkout.yml/badge.svg)](https://github.com/PlugFox/platform_info/actions/workflows/checkout.yml)
 [![Coverage](https://codecov.io/gh/PlugFox/platform_info/branch/master/graph/badge.svg)](https://codecov.io/gh/PlugFox/platform_info)
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
-[![Linter](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/tenhobi/effective_dart)
+[![Linter](https://img.shields.io/badge/style-linter-40c4ff.svg)](https://pub.dev/packages/linter)
+[![GitHub stars](https://img.shields.io/github/stars/plugfox/platform_info?style=social)](https://github.com/plugfox/platform_info/)
 
 ## About
 
@@ -79,7 +78,7 @@ Provides platform information such as:
 
 - `when` method allowing to compose a complex condition
 
-## platform.when
+## Pattern matching
 
 Run functions that satisfy the current state of the platform.
 You can use nested methods to compose more complex queries.
@@ -127,58 +126,34 @@ You can use nested methods to compose more complex queries.
 
 ## For example
 
-```dart
-import 'package:platform_info/platform_info.dart';
-
-void main(List<String> args) {
-  // Use [Platform.instance] or [Platform.I] or [platform] getter
-  print(Platform.instance.version);
-  print(Platform.I.operatingSystem);
-  print(platform.numberOfProcessors.gcd(1));
-
-  final string = platform.when(
-    io: () => platform.when(
-      fuchsia:   () => 'io fuchsia',
-      windows:   () => 'io windows',
-      android:   () => 'io android',
-      iOS:       () => 'io iOS',
-      macOS:     () => 'io macOS',
-      linux:     () => 'io linux',
-      unknown:   () => 'io unknown',
-    ),
-    web: () => platform.when(
-      material:  () => 'web Android or Fuchsia',
-      cupertino: () => 'web macOS or iOS',
-      orElse:    () => 'web Windows or Linux or unknown',
-    ),
-  );
-  print(string);
-}
-```
+![](example.png)
+[Example of using the library](https://pub.dev/packages/platform_info/example) to get the current platform info
 
 ## Coverage
 
 [![](https://codecov.io/gh/PlugFox/platform_info/branch/master/graphs/sunburst.svg)](https://codecov.io/gh/PlugFox/platform_info/branch/master)
 
----
-
 ## Changelog
 
 Refer to the [Changelog](https://github.com/plugfox/platform_info/blob/master/CHANGELOG.md) to get all release notes.
-
----
 
 ## Maintainers
 
 [Plague Fox](https://plugfox.dev)
 
----
+## Funding
+
+If you want to support the development of our library, there are several ways you can do it:
+
+- [Buy me a coffee](https://www.buymeacoffee.com/plugfox)
+- [Support on Patreon](https://www.patreon.com/plugfox)
+- [Subscribe through Boosty](https://boosty.to/plugfox)
+
+We appreciate any form of support, whether it's a financial donation or just a star on GitHub. It helps us to continue developing and improving our library. Thank you for your support!
 
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
-
----
 
 ## Tags
 

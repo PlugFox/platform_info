@@ -29,17 +29,12 @@ enum BuildMode {
     required BuildModeResult Function() release,
     required BuildModeResult Function() profile,
     required BuildModeResult Function() debug,
-  }) {
-    switch (this) {
-      case BuildMode.profile:
-        return profile();
-      case BuildMode.debug:
-        return debug();
-      case BuildMode.release:
-      default:
-        return release();
-    }
-  }
+  }) =>
+      switch (this) {
+        BuildMode.profile => profile(),
+        BuildMode.debug => debug(),
+        BuildMode.release => release(),
+      };
 
   /// Run callback on specific build mode,
   /// if not specified run orElse
@@ -149,25 +144,16 @@ enum OperatingSystem {
     required OperatingSystemResult Function() macOS,
     required OperatingSystemResult Function() windows,
     required OperatingSystemResult Function() unknown,
-  }) {
-    switch (this) {
-      case OperatingSystem.windows:
-        return windows();
-      case OperatingSystem.linux:
-        return linux();
-      case OperatingSystem.macOS:
-        return macOS();
-      case OperatingSystem.iOS:
-        return iOS();
-      case OperatingSystem.android:
-        return android();
-      case OperatingSystem.fuchsia:
-        return fuchsia();
-      case OperatingSystem.unknown:
-      default:
-        return unknown();
-    }
-  }
+  }) =>
+      switch (this) {
+        OperatingSystem.android => android(),
+        OperatingSystem.fuchsia => fuchsia(),
+        OperatingSystem.iOS => iOS(),
+        OperatingSystem.linux => linux(),
+        OperatingSystem.macOS => macOS(),
+        OperatingSystem.windows => windows(),
+        OperatingSystem.unknown => unknown(),
+      };
 
   /// Run callback on specific operation system,
   /// if not specified run orElse

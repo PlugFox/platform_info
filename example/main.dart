@@ -6,24 +6,33 @@ void main(List<String> args) {
   // Use [Platform.instance] or [Platform.I] or [platform] getter
   print(Platform.instance.version);
   print(Platform.I.operatingSystem);
-  print(platform.numberOfProcessors.gcd(1));
+  print(platform.numberOfProcessors);
 
-  final string = platform.when(
-        io: () => platform.when(
-          fuchsia: () => 'io fuchsia',
-          windows: () => 'io windows',
-          android: () => 'io android',
-          iOS: () => 'io iOS',
-          macOS: () => 'io macOS',
-          linux: () => 'io linux',
-          unknown: () => 'io unknown',
-        ),
-        web: () => platform.when(
-          material: () => 'web Android or Fuchsia',
-          cupertino: () => 'web macOS or iOS',
-          orElse: () => 'web Windows or Linux or unknown',
-        ),
-      ) ??
-      '<unknown platform>';
-  print(string);
+  final design = platform.when<String?>(
+    io: () => platform.when<String>(
+      material: () => 'Android or Fuchsia',
+      cupertino: () => 'macOS or iOS',
+      orElse: () => 'Windows or Linux',
+    ),
+    web: () => 'Web',
+  );
+  print(design);
+
+  final operatingSystem = switch (platform.operatingSystem) {
+    OperatingSystem.android => 'Android',
+    OperatingSystem.fuchsia => 'Fuchsia',
+    OperatingSystem.iOS => 'iOS',
+    OperatingSystem.linux => 'Linux',
+    OperatingSystem.macOS => 'macOS',
+    OperatingSystem.windows => 'Windows',
+    OperatingSystem.unknown => 'Unknown',
+  };
+  print(operatingSystem);
+
+  final buildMode = switch (platform.buildMode) {
+    BuildMode.debug => 'Debug',
+    BuildMode.profile => 'Profile',
+    BuildMode.release => 'Release',
+  };
+  print(buildMode);
 }

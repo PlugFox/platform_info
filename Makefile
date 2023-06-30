@@ -22,8 +22,11 @@ analyze: get format
 	@dart analyze --fatal-infos --fatal-warnings
 
 check: analyze
+	@dart pub publish --dry-run
 	@dart pub global activate pana
 	@pana --json --no-warning --line-length 80 > log.pana.json
+
+pana: check
 
 deploy:
 	@echo "Publish"
@@ -37,3 +40,6 @@ coverage: get
 #	@mv coverage/lcov.base.info coverage/lcov.info
 	@lcov --list coverage/lcov.info
 	@genhtml -o coverage coverage/lcov.info
+
+test: get
+	@dart test --debug --coverage=.coverage --platform chrome,vm

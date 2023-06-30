@@ -51,19 +51,13 @@ final class _HostPlatform$IO extends HostPlatform {
     return kDefaultHostPlatform.operatingSystem;
   }
 
-  static String _getVersion() {
-    if (_isKnownEnvironment) {
-      return io.Platform.operatingSystemVersion;
-    }
-    return kDefaultHostPlatform.version;
-  }
+  static String _getVersion() => _isKnownEnvironment
+      ? io.Platform.operatingSystemVersion
+      : kDefaultHostPlatform.version;
 
-  static int _numberOfProcessors() {
-    if (_isKnownEnvironment) {
-      return io.Platform.numberOfProcessors;
-    }
-    return kDefaultHostPlatform.numberOfProcessors;
-  }
+  static int _numberOfProcessors() => _isKnownEnvironment
+      ? io.Platform.numberOfProcessors
+      : kDefaultHostPlatform.numberOfProcessors;
 
   static String _getLocale() {
     final lang = io.Platform.localeName
