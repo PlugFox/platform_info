@@ -19,6 +19,11 @@ Easy to use, just add to `pubspec.yaml` as dependency and then import:
 Platform is a singleton, and the default way to access an instance of Platform is to call static getters:
 `Platform.instance` or `Platform.I` or `platform`
 
+## Usage
+
+![](example.png)
+[Example of using the library](https://pub.dev/packages/platform_info/example) to get the current platform info
+
 ## Platform Information
 
 Provides platform information such as:
@@ -123,11 +128,6 @@ You can use nested methods to compose more complex queries.
 4. IO/Web
 5. Build mode
 6. Call [orElse] if any callback was not called
-
-## For example
-
-![](example.png)
-[Example of using the library](https://pub.dev/packages/platform_info/example) to get the current platform info
 
 ## Coverage
 

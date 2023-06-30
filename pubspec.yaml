@@ -15,11 +15,11 @@ funding:
   - https://boosty.to/plugfox
 
 topics:
-  - ws
-  - websocket
+  - platform
+  - info
   - cross-platform
-  - reconnect
-  - socket
+  - device
+  - information
 
 platforms:
   android:
