@@ -11,7 +11,7 @@ get:
 
 upgrade: get
 	@echo "Upgrading dependencies"
-	@flutter pub upgrade
+	@dart pub upgrade
 
 outdated:
 	@echo "Outdated check"

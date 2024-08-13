@@ -1,3 +1,7 @@
+## 5.0.0 - 2024-08-13
+
+- Update dependencies
+
 ## 4.0.2 - 2023-06-30
 
 - Fix topics

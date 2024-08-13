@@ -6,7 +6,7 @@ import 'enums.dart';
 /// contain info about host device
 @immutable
 abstract base class HostPlatform {
-  /// {@nodoc}
+  /// A constant constructor to allow subclasses to be const.
   const HostPlatform();
 
   /// Host platform type
@@ -40,7 +40,7 @@ abstract base class HostPlatform {
 
 /// Extended host platform
 abstract base class ExtendedHostPlatform extends HostPlatform {
-  /// {@nodoc}
+  /// A constant constructor to allow subclasses to be const.
   const ExtendedHostPlatform();
 
   /// Is web-based applications
