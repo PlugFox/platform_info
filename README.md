@@ -36,8 +36,8 @@ Provides platform information such as:
 
 - Host platform type
 
-  - io (vm, desktops, mobile, console)
-  - web (html, js, browser)
+  - vm (io, desktops, mobile, console, server)
+  - js (web, html, browser)
 
 - Operating system
 
@@ -49,7 +49,7 @@ Provides platform information such as:
   - Android
   - Unknown
 
-- Version (`<unknown>` if not available)
+- Version (`unknown` if not available)
 
 - Locale string (`en` if not available)
 
@@ -59,7 +59,7 @@ Provides platform information such as:
 
 - Is a Web-based applications
 
-- Is a I/O supporting for non-web applications
+- Is a VM supporting for non-web applications
 
 - Is a mobile device (Android, iOS)
 
@@ -108,10 +108,10 @@ You can use nested methods to compose more complex queries.
 [mobile] - is mobile device (Android, iOS)
 [desktop] - is desktop device (Windows, MacOS, Fuchsia)
 
-##### IO or Web
+##### VM (IO) or JS (Web)
 
-[web] - is web-based applications
-[io] - is I/O supporting for non-web applications
+[js] - is web-based applications
+[vm] - is I/O supporting for non-web applications
 
 ##### Build mode
 
@@ -125,7 +125,7 @@ You can use nested methods to compose more complex queries.
 1. Operating System
 2. Design
 3. Mobile/Desktop
-4. IO/Web
+4. VM/JS
 5. Build mode
 6. Call [orElse] if any callback was not called
 
