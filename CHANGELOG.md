@@ -2,7 +2,8 @@
 
 - Update dependencies
 - dart:html replaced with package:web
-- Renamed `HostPlatformType.web` to `HostPlatformType.js` and `HostPlatformType.io` to `HostPlatformType.vm`
+- Enums replaced with sealed classes
+- Renamed getters
 
 ## 4.0.2 - 2023-06-30
 

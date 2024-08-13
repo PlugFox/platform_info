@@ -23,17 +23,17 @@ final class _HostPlatform$IO extends HostPlatform {
 
   static OperatingSystem _getOS() {
     if (_isKnownEnvironment) {
-      if (io.Platform.fuchsia) {
+      if (io.Platform.isFuchsia) {
         return const OperatingSystem.fuchsia();
-      } else if (io.Platform.windows) {
+      } else if (io.Platform.isWindows) {
         return const OperatingSystem.windows();
-      } else if (io.Platform.android) {
+      } else if (io.Platform.isAndroid) {
         return const OperatingSystem.android();
-      } else if (io.Platform.macOS) {
+      } else if (io.Platform.isMacOS) {
         return const OperatingSystem.macOS();
-      } else if (io.Platform.iOS) {
+      } else if (io.Platform.isIOS) {
         return const OperatingSystem.iOS();
-      } else if (io.Platform.linux) {
+      } else if (io.Platform.isLinux) {
         return const OperatingSystem.linux();
       }
     }

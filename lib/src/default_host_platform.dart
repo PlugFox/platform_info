@@ -19,7 +19,7 @@ final class DefaultHostPlatform extends HostPlatform {
   OperatingSystem get operatingSystem => const OperatingSystem.unknown();
 
   @override
-  String get version => '<unknown>';
+  String get version => 'unknown';
 
   @override
   String get locale => 'en';

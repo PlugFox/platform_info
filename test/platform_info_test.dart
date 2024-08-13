@@ -6,9 +6,7 @@ import 'package:platform_info/src/stub_host_platform.dart' as stub;
 import 'package:test/test.dart';
 
 // ignore_for_file: unnecessary_statements, avoid_print, cascade_invocations
-// ignore_for_file: non_const_call_to_literal_constructor, unnecessary_lambdas
-// ignore_for_file: prefer_const_declarations, prefer_const_constructors
-// ignore_for_file: unnecessary_type_check
+// ignore_for_file: unnecessary_lambdas, unnecessary_type_check
 
 void main() {
   group('Platform', () {
@@ -65,7 +63,7 @@ void main() {
     });
 
     test('toString', () {
-      expect(Platform.I.toString(), '<Platform ${Platform.I.version}>');
+      expect(Platform.I.toString(), Platform.I.version);
     });
   });
 
@@ -75,12 +73,12 @@ void main() {
       const type =
           identical(0, 0.0) ? HostPlatformType.js() : HostPlatformType.vm();
       expect(() => const DefaultHostPlatform(), returnsNormally);
-      expect(() => DefaultHostPlatform(), returnsNormally);
-      expect(stubPlatform, const DefaultHostPlatform());
-      expect(stubPlatform.operatingSystem, OperatingSystem.unknown);
+      expect(stubPlatform, isA<DefaultHostPlatform>());
+      expect(
+          stubPlatform.operatingSystem, same(const OperatingSystem.unknown()));
       expect(stubPlatform.numberOfProcessors, 0);
       expect(stubPlatform.locale, 'en');
-      expect(stubPlatform.version, '<unknown>');
+      expect(stubPlatform.version, 'unknown');
       expect(stubPlatform.type, type);
     });
   });
@@ -89,24 +87,25 @@ void main() {
     test('unknown environment', () {
       runZoned(
         () {
-          final platform = DefaultHostPlatform();
-          expect(platform.operatingSystem, OperatingSystem.unknown);
+          const platform = DefaultHostPlatform();
+          expect(
+              platform.operatingSystem, same(const OperatingSystem.unknown()));
           expect(platform.numberOfProcessors, 0);
           expect(platform.locale, 'en');
-          expect(platform.version, '<unknown>');
+          expect(platform.version, 'unknown');
           expect(
               platform.type,
               anyOf(
-                HostPlatformType.vm(),
-                HostPlatformType.js(),
+                const HostPlatformType.vm(),
+                const HostPlatformType.js(),
               ));
         },
         zoneValues: {#platform_info_test.isUnknownEnvironment: true},
       );
     });
   }, onPlatform: {
-    'android': Timeout.factor(2),
-    'ios': Timeout.factor(2),
+    'android': const Timeout.factor(2),
+    'ios': const Timeout.factor(2),
     /* 'browser': const Skip('Not supported on Browser'), */
   });
 
@@ -131,7 +130,7 @@ void main() {
     test('Operating System', () {
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.fuchsia(),
+            operatingSystem: const OperatingSystem.fuchsia(),
           ).when(
             fuchsia: returnTrue,
             orElse: returnFalse,
@@ -140,7 +139,7 @@ void main() {
 
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.windows(),
+            operatingSystem: const OperatingSystem.windows(),
           ).when(
             windows: returnTrue,
             orElse: returnFalse,
@@ -149,7 +148,7 @@ void main() {
 
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.android(),
+            operatingSystem: const OperatingSystem.android(),
           ).when(
             android: returnTrue,
             orElse: returnFalse,
@@ -158,7 +157,7 @@ void main() {
 
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.iOS(),
+            operatingSystem: const OperatingSystem.iOS(),
           ).when(
             iOS: returnTrue,
             orElse: returnFalse,
@@ -167,7 +166,7 @@ void main() {
 
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.macOS(),
+            operatingSystem: const OperatingSystem.macOS(),
           ).when(
             macOS: returnTrue,
             orElse: returnFalse,
@@ -176,7 +175,7 @@ void main() {
 
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.linux(),
+            operatingSystem: const OperatingSystem.linux(),
           ).when(
             linux: returnTrue,
             orElse: returnFalse,
@@ -185,7 +184,7 @@ void main() {
 
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.unknown(),
+            operatingSystem: const OperatingSystem.unknown(),
           ).when(
             unknown: returnTrue,
             orElse: returnFalse,
@@ -196,7 +195,7 @@ void main() {
     test('Design', () {
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.android(),
+            operatingSystem: const OperatingSystem.android(),
           ).when(
             material: returnTrue,
             orElse: returnFalse,
@@ -205,7 +204,7 @@ void main() {
 
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.iOS(),
+            operatingSystem: const OperatingSystem.iOS(),
           ).when(
             cupertino: returnTrue,
             orElse: returnFalse,
@@ -216,7 +215,7 @@ void main() {
     test('Mobile/Desktop', () {
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.android(),
+            operatingSystem: const OperatingSystem.android(),
           ).when(
             mobile: returnTrue,
             orElse: returnFalse,
@@ -225,7 +224,7 @@ void main() {
 
       expect(
           FakePlatform(
-            operatingSystem: OperatingSystem.windows(),
+            operatingSystem: const OperatingSystem.windows(),
           ).when(
             desktop: returnTrue,
             orElse: returnFalse,
@@ -236,7 +235,7 @@ void main() {
     test('IO or Web', () {
       expect(
           FakePlatform(
-            type: HostPlatformType.vm(),
+            type: const HostPlatformType.vm(),
           ).when(
             vm: returnTrue,
             orElse: returnFalse,
@@ -245,7 +244,7 @@ void main() {
 
       expect(
           FakePlatform(
-            type: HostPlatformType.js(),
+            type: const HostPlatformType.js(),
           ).when(
             js: returnTrue,
             orElse: returnFalse,
@@ -256,7 +255,7 @@ void main() {
     test('Build mode', () {
       expect(
           FakePlatform(
-            buildMode: BuildMode.debug(),
+            buildMode: const BuildMode.debug(),
           ).when(
             debug: returnTrue,
             orElse: returnFalse,
@@ -265,7 +264,7 @@ void main() {
 
       expect(
           FakePlatform(
-            buildMode: BuildMode.profile(),
+            buildMode: const BuildMode.profile(),
           ).when(
             profile: returnTrue,
             orElse: returnFalse,
@@ -274,7 +273,7 @@ void main() {
 
       expect(
           FakePlatform(
-            buildMode: BuildMode.release(),
+            buildMode: const BuildMode.release(),
           ).when(
             release: returnTrue,
             orElse: returnFalse,
@@ -308,7 +307,7 @@ void main() {
       expect(const BuildMode.profile().profile, isTrue);
       expect(const BuildMode.debug().debug, isTrue);
       expect(
-        BuildMode.release().maybeWhen(
+        const BuildMode.release().maybeWhen(
           orElse: () => false,
           debug: () => false,
           profile: () => false,
@@ -317,7 +316,7 @@ void main() {
         isTrue,
       );
       expect(
-        BuildMode.profile().maybeWhen(
+        const BuildMode.profile().maybeWhen(
           orElse: () => false,
           debug: () => false,
           profile: () => true,
@@ -326,7 +325,7 @@ void main() {
         isTrue,
       );
       expect(
-        BuildMode.debug().maybeWhen(
+        const BuildMode.debug().maybeWhen(
           orElse: () => false,
           debug: () => true,
           profile: () => false,
@@ -335,7 +334,7 @@ void main() {
         isTrue,
       );
       expect(
-        BuildMode.debug().maybeWhen(
+        const BuildMode.debug().maybeWhen(
           orElse: () => true,
           release: () => false,
           profile: () => false,
@@ -345,17 +344,17 @@ void main() {
     });
 
     test('HostPlatformType', () {
-      expect(HostPlatformType.vm().vm, isTrue);
-      expect(HostPlatformType.js().js, isTrue);
+      expect(const HostPlatformType.vm().vm, isTrue);
+      expect(const HostPlatformType.js().js, isTrue);
       expect(
-        HostPlatformType.vm().when(
+        const HostPlatformType.vm().when(
           vm: () => true,
           js: () => false,
         ),
         isTrue,
       );
       expect(
-        HostPlatformType.js().when(
+        const HostPlatformType.js().when(
           vm: () => false,
           js: () => true,
         ),
@@ -364,16 +363,16 @@ void main() {
     });
 
     test('OperatingSystem', () {
-      expect(OperatingSystem.fuchsia().fuchsia, isTrue);
-      expect(OperatingSystem.unknown().unknown, isTrue);
-      expect(OperatingSystem.android().android, isTrue);
-      expect(OperatingSystem.iOS().iOS, isTrue);
-      expect(OperatingSystem.linux().linux, isTrue);
-      expect(OperatingSystem.macOS().macOS, isTrue);
-      expect(OperatingSystem.windows().windows, isTrue);
+      expect(const OperatingSystem.fuchsia().fuchsia, isTrue);
+      expect(const OperatingSystem.unknown().unknown, isTrue);
+      expect(const OperatingSystem.android().android, isTrue);
+      expect(const OperatingSystem.iOS().iOS, isTrue);
+      expect(const OperatingSystem.linux().linux, isTrue);
+      expect(const OperatingSystem.macOS().macOS, isTrue);
+      expect(const OperatingSystem.windows().windows, isTrue);
 
       expect(
-        OperatingSystem.fuchsia().maybeWhen(
+        const OperatingSystem.fuchsia().maybeWhen(
           fuchsia: () => true,
           orElse: () => false,
         ),
@@ -381,7 +380,7 @@ void main() {
       );
 
       expect(
-        OperatingSystem.windows().maybeWhen(
+        const OperatingSystem.windows().maybeWhen(
           windows: () => true,
           orElse: () => false,
         ),
@@ -389,7 +388,7 @@ void main() {
       );
 
       expect(
-        OperatingSystem.macOS().maybeWhen(
+        const OperatingSystem.macOS().maybeWhen(
           macOS: () => true,
           orElse: () => false,
         ),
@@ -397,7 +396,7 @@ void main() {
       );
 
       expect(
-        OperatingSystem.linux().maybeWhen(
+        const OperatingSystem.linux().maybeWhen(
           linux: () => true,
           orElse: () => false,
         ),
@@ -405,7 +404,7 @@ void main() {
       );
 
       expect(
-        OperatingSystem.iOS().maybeWhen(
+        const OperatingSystem.iOS().maybeWhen(
           iOS: () => true,
           orElse: () => false,
         ),
@@ -413,7 +412,7 @@ void main() {
       );
 
       expect(
-        OperatingSystem.android().maybeWhen(
+        const OperatingSystem.android().maybeWhen(
           android: () => true,
           orElse: () => false,
         ),
@@ -421,7 +420,7 @@ void main() {
       );
 
       expect(
-        OperatingSystem.unknown().maybeWhen(
+        const OperatingSystem.unknown().maybeWhen(
           fuchsia: () => false,
           orElse: () => true,
         ),
