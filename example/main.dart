@@ -19,13 +19,13 @@ void main(List<String> args) {
   print(design);
 
   final operatingSystem = switch (platform.operatingSystem) {
-    OperatingSystem$Android _ => 'Android',
-    OperatingSystem$Fuchsia _ => 'Fuchsia',
-    OperatingSystem$iOS _ => 'iOS',
-    OperatingSystem$Linux _ => 'Linux',
-    OperatingSystem$MacOS _ => 'macOS',
-    OperatingSystem$Windows _ => 'Windows',
-    OperatingSystem$Unknown _ => 'Unknown',
+    const OperatingSystem.android() => 'Android',
+    const OperatingSystem.fuchsia() => 'Fuchsia',
+    const OperatingSystem.iOS() => 'iOS',
+    const OperatingSystem.linux() => 'Linux',
+    const OperatingSystem.macOS() => 'macOS',
+    const OperatingSystem.windows() => 'Windows',
+    const OperatingSystem.unknown() || _ => 'Unknown',
   };
   print(operatingSystem);
 
