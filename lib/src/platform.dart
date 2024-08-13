@@ -11,7 +11,7 @@ import 'stub_host_platform.dart'
     // ignore: uri_does_not_exist
     if (dart.library.js_interop) 'js_host_platform.dart'
     // ignore: uri_does_not_exist
-    if (dart.library.io) 'io_host_platform.dart';
+    if (dart.library.io) 'vm_host_platform.dart';
 
 /// [Platform] info
 /// Works on the web, mobile phones, desktops and console.
@@ -52,6 +52,47 @@ import 'stub_host_platform.dart'
 ///
 @immutable
 final class Platform extends ExtendedHostPlatform with PlatformMethods {
+  static HostPlatform _getHostPlatform() => getHostPlatform();
+
+  /// Access to the Singleton instance of Platform
+  static Platform get instance => _this;
+
+  /// Short form to access the instance of Platform
+  static Platform get I => _this;
+
+  /// Singleton info about platform
+  static final Platform _this = Platform._internalFactoryFromEnvironment();
+
+  static BuildMode _getCurrentBuildMode() => () {
+        if (const bool.fromEnvironment('dart.vm.product')) {
+          return const BuildMode.release();
+        }
+        var result = const BuildMode.profile();
+        assert(() {
+          result = const BuildMode.debug();
+          return true;
+        }(), '');
+        return result;
+      }();
+
+  /// Internal factory from environment
+  factory Platform._internalFactoryFromEnvironment() => Platform._internal(
+        buildMode: _getCurrentBuildMode(),
+        hostPlatform: _getHostPlatform(),
+      );
+
+  /// Internal constructor
+  Platform._internal({
+    required this.buildMode,
+    required HostPlatform hostPlatform,
+  })  : _hostPlatform = hostPlatform,
+        mobile = kListOSForMobile.contains(hostPlatform.operatingSystem),
+        desktop = kListOSForDesktop.contains(hostPlatform.operatingSystem),
+        material =
+            kListOSWithMaterialDesign.contains(hostPlatform.operatingSystem),
+        cupertino =
+            kListOSWithCupertinoDesign.contains(hostPlatform.operatingSystem);
+
   @override
   HostPlatformType get type => _hostPlatform.type;
 
@@ -68,92 +109,49 @@ final class Platform extends ExtendedHostPlatform with PlatformMethods {
   int get numberOfProcessors => _hostPlatform.numberOfProcessors;
 
   @override
-  final bool isOperatingSystemKnown;
+  bool get js => _hostPlatform.type.js;
 
   @override
-  bool get isWeb => _hostPlatform.type == HostPlatformType.web;
+  bool get vm => _hostPlatform.type.vm;
 
   @override
-  bool get isIO => _hostPlatform.type == HostPlatformType.io;
+  final bool mobile;
 
   @override
-  final bool isMobile;
+  final bool desktop;
 
   @override
-  final bool isDesktop;
+  final bool material;
 
   @override
-  final bool isMaterial;
+  final bool cupertino;
 
   @override
-  final bool isCupertino;
+  bool get android => operatingSystem.android;
 
   @override
-  bool get isAndroid => operatingSystem == OperatingSystem.android;
+  bool get fuchsia => operatingSystem.fuchsia;
 
   @override
-  bool get isFuchsia => operatingSystem == OperatingSystem.fuchsia;
+  bool get iOS => operatingSystem.iOS;
 
   @override
-  bool get isIOS => operatingSystem == OperatingSystem.iOS;
+  bool get linux => operatingSystem.linux;
 
   @override
-  bool get isLinux => operatingSystem == OperatingSystem.linux;
+  bool get macOS => operatingSystem.macOS;
 
   @override
-  bool get isMacOS => operatingSystem == OperatingSystem.macOS;
+  bool get windows => operatingSystem.windows;
 
   @override
-  bool get isWindows => operatingSystem == OperatingSystem.windows;
+  bool get unknown => operatingSystem.unknown;
 
   @override
   final BuildMode buildMode;
 
   /// Host platform contain info about host device
   final HostPlatform _hostPlatform;
-
-  static BuildMode _getCurrentBuildMode() => () {
-        if (const bool.fromEnvironment('dart.vm.product')) {
-          return BuildMode.release;
-        }
-        var result = BuildMode.profile;
-        assert(() {
-          result = BuildMode.debug;
-          return true;
-        }(), '');
-        return result;
-      }();
-
-  static HostPlatform _getHostPlatform() => getHostPlatform();
-
-  /// Access to the Singleton instance of Platform
-  static Platform get instance => _this;
-
-  /// Short form to access the instance of Platform
-  static Platform get I => _this;
-
-  /// Singleton info about platform
-  static final Platform _this = Platform._internalFactoryFromEnvironment();
-
-  /// Internal factory from environment
-  factory Platform._internalFactoryFromEnvironment() => Platform._internal(
-        buildMode: _getCurrentBuildMode(),
-        hostPlatform: _getHostPlatform(),
-      );
-
-  /// Internal constructor
-  Platform._internal({
-    required this.buildMode,
-    required HostPlatform hostPlatform,
-  })  : _hostPlatform = hostPlatform,
-        isOperatingSystemKnown =
-            hostPlatform.operatingSystem != OperatingSystem.unknown,
-        isMobile = kListOSForMobile.contains(hostPlatform.operatingSystem),
-        isDesktop = kListOSForDesktop.contains(hostPlatform.operatingSystem),
-        isMaterial =
-            kListOSWithMaterialDesign.contains(hostPlatform.operatingSystem),
-        isCupertino =
-            kListOSWithCupertinoDesign.contains(hostPlatform.operatingSystem);
 
   @override
   int get hashCode => 0;
@@ -162,7 +160,7 @@ final class Platform extends ExtendedHostPlatform with PlatformMethods {
   bool operator ==(Object other) => other is Platform;
 
   @override
-  String toString() => '<Platform $version>';
+  String toString() => version;
 }
 
 /// Fake class for test needs
@@ -178,7 +176,7 @@ final class FakePlatform extends Platform {
     String? locale,
     int? numberOfProcessors,
   }) : super._internal(
-          buildMode: buildMode ?? BuildMode.debug,
+          buildMode: buildMode ?? const BuildMode.debug(),
           hostPlatform: _FakeHostPlatform(
             type: type ?? const DefaultHostPlatform().type,
             operatingSystem:

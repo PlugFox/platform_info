@@ -1,6 +1,8 @@
 ## 5.0.0 - 2024-08-13
 
 - Update dependencies
+- dart:html replaced with package:web
+- Renamed `HostPlatformType.web` to `HostPlatformType.js` and `HostPlatformType.io` to `HostPlatformType.vm`
 
 ## 4.0.2 - 2023-06-30
 
@@ -58,15 +60,15 @@
 
 ### Changed
 
-- Fix `kListOSWithCupertinoDesign` constant and `isCupertino` flag
+- Fix `kListOSWithCupertinoDesign` constant and `cupertino` flag
 
 ## 2.0.1 - 2020-09-06
 
 ### Added
 
 - Add getters:
-  - `isWeb` - Is a web-based applications
-  - `isIO` - Is a I/O supporting for non-web applications
+  - `isJS` - Is a web-based applications
+  - `isVM` - Is a I/O supporting for non-web applications
 
 ## 2.0.0 - 2020-08-28
 
@@ -118,9 +120,9 @@
 ### Added
 
 - Add new flags:
-  - isDesktop
-  - isMaterial
-  - isCupertino
+  - desktop
+  - material
+  - cupertino
 
 ## 1.0.1 - 2020-04-22
 

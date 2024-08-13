@@ -1,5 +1,6 @@
+// ignore_for_file: unnecessary_this
+
 import 'base_host_platform.dart';
-import 'enums.dart';
 
 /// Mixin with methods that extend the functionality of the platform
 base mixin PlatformMethods on ExtendedHostPlatform {
@@ -25,8 +26,8 @@ base mixin PlatformMethods on ExtendedHostPlatform {
   /// [desktop] - is desktop device (Windows, MacOS, Fuchsia)
   ///
   /// ### IO or Web
-  /// [web] - is web-based applications
-  /// [io] - is I/O supporting for non-web applications
+  /// [js] - is web-based applications
+  /// [vm] - is I/O supporting for non-web applications
   ///
   /// ### Build mode
   /// [release] - release build mode
@@ -77,8 +78,8 @@ base mixin PlatformMethods on ExtendedHostPlatform {
     PlatformResult Function()? cupertino,
     PlatformResult Function()? mobile,
     PlatformResult Function()? desktop,
-    PlatformResult Function()? io,
-    PlatformResult Function()? web,
+    PlatformResult Function()? vm,
+    PlatformResult Function()? js,
     PlatformResult Function()? release,
     PlatformResult Function()? profile,
     PlatformResult Function()? debug,
@@ -86,57 +87,57 @@ base mixin PlatformMethods on ExtendedHostPlatform {
   }) {
     {
       // Operating System
-      if (fuchsia != null && isFuchsia) {
+      if (fuchsia != null && this.fuchsia) {
         return fuchsia();
-      } else if (windows != null && isWindows) {
+      } else if (windows != null && this.windows) {
         return windows();
-      } else if (android != null && isAndroid) {
+      } else if (android != null && this.android) {
         return android();
-      } else if (iOS != null && isIOS) {
+      } else if (iOS != null && this.iOS) {
         return iOS();
-      } else if (macOS != null && isMacOS) {
+      } else if (macOS != null && this.macOS) {
         return macOS();
-      } else if (linux != null && isLinux) {
+      } else if (linux != null && this.linux) {
         return linux();
-      } else if (unknown != null && !isOperatingSystemKnown) {
+      } else if (unknown != null && this.unknown) {
         return unknown();
       }
     }
 
     {
       // Design
-      if (material != null && isMaterial) {
+      if (material != null && this.material) {
         return material();
-      } else if (cupertino != null && isCupertino) {
+      } else if (cupertino != null && this.cupertino) {
         return cupertino();
       }
     }
 
     {
       // Mobile/Desktop
-      if (mobile != null && isMobile) {
+      if (mobile != null && this.mobile) {
         return mobile();
-      } else if (desktop != null && isDesktop) {
+      } else if (desktop != null && this.desktop) {
         return desktop();
       }
     }
 
     {
       // IO/Web
-      if (io != null && isIO) {
-        return io();
-      } else if (web != null && isWeb) {
-        return web();
+      if (vm != null && this.vm) {
+        return vm();
+      } else if (js != null && this.js) {
+        return js();
       }
     }
 
     {
       // Build mode
-      if (debug != null && buildMode == BuildMode.debug) {
+      if (debug != null && this.buildMode.debug) {
         return debug();
-      } else if (profile != null && buildMode == BuildMode.profile) {
+      } else if (profile != null && this.buildMode.profile) {
         return profile();
-      } else if (release != null && buildMode == BuildMode.release) {
+      } else if (release != null && this.buildMode.release) {
         return release();
       }
     }

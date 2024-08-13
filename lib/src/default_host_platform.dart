@@ -11,11 +11,12 @@ final class DefaultHostPlatform extends HostPlatform {
   const DefaultHostPlatform();
 
   @override
-  HostPlatformType get type =>
-      identical(0, 0.0) ? HostPlatformType.web : HostPlatformType.io;
+  HostPlatformType get type => identical(0, 0.0)
+      ? const HostPlatformType.js()
+      : const HostPlatformType.vm();
 
   @override
-  OperatingSystem get operatingSystem => OperatingSystem.unknown;
+  OperatingSystem get operatingSystem => const OperatingSystem.unknown();
 
   @override
   String get version => '<unknown>';

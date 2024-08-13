@@ -6,32 +6,32 @@ import 'enums.dart';
 
 /// Set of all mobile phone operating systems
 @internal
-const Set<OperatingSystem> kListOSForMobile = <OperatingSystem>{
-  OperatingSystem.android,
-  OperatingSystem.iOS,
+final Set<OperatingSystem> kListOSForMobile = <OperatingSystem>{
+  const OperatingSystem.android(),
+  const OperatingSystem.iOS(),
 };
 
 /// Set of all operating systems with material design
 @internal
-const Set<OperatingSystem> kListOSWithMaterialDesign = <OperatingSystem>{
-  OperatingSystem.android,
-  OperatingSystem.fuchsia,
+final Set<OperatingSystem> kListOSWithMaterialDesign = <OperatingSystem>{
+  const OperatingSystem.android(),
+  const OperatingSystem.fuchsia(),
 };
 
 /// Set of all operating systems with cupertino design
 @internal
-const Set<OperatingSystem> kListOSWithCupertinoDesign = <OperatingSystem>{
-  OperatingSystem.macOS,
-  OperatingSystem.iOS,
+final Set<OperatingSystem> kListOSWithCupertinoDesign = <OperatingSystem>{
+  const OperatingSystem.macOS(),
+  const OperatingSystem.iOS(),
 };
 
 /// Set of all desktop operating systems
 @internal
-const Set<OperatingSystem> kListOSForDesktop = <OperatingSystem>{
-  OperatingSystem.windows,
-  OperatingSystem.macOS,
-  OperatingSystem.fuchsia,
-  OperatingSystem.linux,
+final Set<OperatingSystem> kListOSForDesktop = <OperatingSystem>{
+  const OperatingSystem.windows(),
+  const OperatingSystem.macOS(),
+  const OperatingSystem.fuchsia(),
+  const OperatingSystem.linux(),
 };
 
 /// Unknown host platform with default values

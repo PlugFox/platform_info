@@ -44,53 +44,53 @@ abstract base class ExtendedHostPlatform extends HostPlatform {
   const ExtendedHostPlatform();
 
   /// Is web-based applications
-  abstract final bool isWeb;
+  abstract final bool js;
 
   /// Is I/O supporting for non-web applications
-  abstract final bool isIO;
-
-  /// Operating system is known type
-  abstract final bool isOperatingSystemKnown;
+  abstract final bool vm;
 
   /// Is mobile device (Android, iOS)
-  abstract final bool isMobile;
+  abstract final bool mobile;
 
   /// Is desktop device (Windows, MacOS, Fuchsia)
-  abstract final bool isDesktop;
+  abstract final bool desktop;
 
   /// Is material (Android, Fuchsia)
-  abstract final bool isMaterial;
+  abstract final bool material;
 
   /// Is cupertino (MacOS, iOS)
-  abstract final bool isCupertino;
+  abstract final bool cupertino;
+
+  /// Whether the operating system is a version of
+  /// [Android](https://en.wikipedia.org/wiki/Android_%28operating_system%29)
+  abstract final bool android;
+
+  /// Whether the operating system is a version of
+  /// [Fuchsia](https://en.wikipedia.org/wiki/Google_Fuchsia)
+  abstract final bool fuchsia;
+
+  /// Whether the operating system is a version of
+  /// [iOS](https://en.wikipedia.org/wiki/IOS)
+  abstract final bool iOS;
 
   /// Whether the operating system is a version of
   /// [Linux](https://en.wikipedia.org/wiki/Linux)
   ///
   /// This value is `false` if the operating system is a specialized
   /// version of Linux that identifies itself by a different name,
-  /// for example Android (see [isAndroid])
-  abstract final bool isLinux;
+  /// for example Android (see [android])
+  abstract final bool linux;
 
   /// Whether the operating system is a version of
   /// [macOS](https://en.wikipedia.org/wiki/MacOS)
-  abstract final bool isMacOS;
+  abstract final bool macOS;
 
   /// Whether the operating system is a version of
   /// [Microsoft Windows](https://en.wikipedia.org/wiki/Microsoft_Windows).
-  abstract final bool isWindows;
+  abstract final bool windows;
 
-  /// Whether the operating system is a version of
-  /// [Android](https://en.wikipedia.org/wiki/Android_%28operating_system%29)
-  abstract final bool isAndroid;
-
-  /// Whether the operating system is a version of
-  /// [iOS](https://en.wikipedia.org/wiki/IOS)
-  abstract final bool isIOS;
-
-  /// Whether the operating system is a version of
-  /// [Fuchsia](https://en.wikipedia.org/wiki/Google_Fuchsia)
-  abstract final bool isFuchsia;
+  /// Unknown operating system
+  abstract final bool unknown;
 
   /// Build mode
   ///  + release - Release build mode

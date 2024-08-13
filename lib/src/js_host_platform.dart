@@ -22,7 +22,7 @@ final class _HostPlatform$Web extends HostPlatform {
   static bool get _isKnownEnvironment => !_isUnknownEnvironment;
 
   @override
-  final HostPlatformType type = HostPlatformType.web;
+  final HostPlatformType type = const HostPlatformType.js();
 
   @override
   final OperatingSystem operatingSystem = _getOS();
@@ -40,19 +40,19 @@ final class _HostPlatform$Web extends HostPlatform {
     if (_isKnownEnvironment) {
       final appVersion = _getVersion().toLowerCase();
       if (appVersion.contains('fuchsia')) {
-        return OperatingSystem.fuchsia;
+        return const OperatingSystem.fuchsia();
       } else if (appVersion.contains('mac')) {
-        return OperatingSystem.macOS;
+        return const OperatingSystem.macOS();
       } else if (appVersion.contains('win')) {
-        return OperatingSystem.windows;
+        return const OperatingSystem.windows();
       } else if (appVersion.contains('android')) {
-        return OperatingSystem.android;
+        return const OperatingSystem.android();
       } else if (appVersion.contains('iphone')) {
-        return OperatingSystem.iOS;
+        return const OperatingSystem.iOS();
       } else if (appVersion.contains('ios')) {
-        return OperatingSystem.iOS;
+        return const OperatingSystem.iOS();
       } else if (appVersion.contains('linux')) {
-        return OperatingSystem.linux;
+        return const OperatingSystem.linux();
       }
     }
     return kDefaultHostPlatform.operatingSystem;

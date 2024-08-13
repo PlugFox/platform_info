@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io' as io show Platform;
+import 'dart:io' as io;
 
 import 'base_host_platform.dart';
 import 'constants.dart';
@@ -18,7 +18,7 @@ final class _HostPlatform$IO extends HostPlatform {
   static bool get _isKnownEnvironment => !_isUnknownEnvironment;
 
   @override
-  final HostPlatformType type = HostPlatformType.io;
+  final HostPlatformType type = const HostPlatformType.vm();
 
   @override
   final OperatingSystem operatingSystem = _getOS();
@@ -34,18 +34,18 @@ final class _HostPlatform$IO extends HostPlatform {
 
   static OperatingSystem _getOS() {
     if (_isKnownEnvironment) {
-      if (io.Platform.isFuchsia) {
-        return OperatingSystem.fuchsia;
-      } else if (io.Platform.isWindows) {
-        return OperatingSystem.windows;
-      } else if (io.Platform.isAndroid) {
-        return OperatingSystem.android;
-      } else if (io.Platform.isMacOS) {
-        return OperatingSystem.macOS;
-      } else if (io.Platform.isIOS) {
-        return OperatingSystem.iOS;
-      } else if (io.Platform.isLinux) {
-        return OperatingSystem.linux;
+      if (io.Platform.fuchsia) {
+        return const OperatingSystem.fuchsia();
+      } else if (io.Platform.windows) {
+        return const OperatingSystem.windows();
+      } else if (io.Platform.android) {
+        return const OperatingSystem.android();
+      } else if (io.Platform.macOS) {
+        return const OperatingSystem.macOS();
+      } else if (io.Platform.iOS) {
+        return const OperatingSystem.iOS();
+      } else if (io.Platform.linux) {
+        return const OperatingSystem.linux();
       }
     }
     return kDefaultHostPlatform.operatingSystem;
