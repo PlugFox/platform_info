@@ -9,7 +9,7 @@ import 'enums.dart';
 import 'methods.dart';
 import 'stub_host_platform.dart'
     // ignore: uri_does_not_exist
-    if (dart.library.html) 'web_host_platform.dart'
+    if (dart.library.js_interop) 'js_host_platform.dart'
     // ignore: uri_does_not_exist
     if (dart.library.io) 'io_host_platform.dart';
 
