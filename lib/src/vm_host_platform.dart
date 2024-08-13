@@ -10,27 +10,16 @@ HostPlatform getHostPlatform() => _HostPlatform$IO._();
 
 /// i/o based host platform
 final class _HostPlatform$IO extends HostPlatform {
-  _HostPlatform$IO._();
+  _HostPlatform$IO._()
+      : operatingSystem = _getOS(),
+        version = _getVersion(),
+        locale = _getLocale(),
+        numberOfProcessors = _numberOfProcessors();
 
   static bool get _isUnknownEnvironment =>
       Zone.current[#platform_info_test.isUnknownEnvironment] as bool? ?? false;
 
   static bool get _isKnownEnvironment => !_isUnknownEnvironment;
-
-  @override
-  final HostPlatformType type = const HostPlatformType.vm();
-
-  @override
-  final OperatingSystem operatingSystem = _getOS();
-
-  @override
-  final String version = _getVersion();
-
-  @override
-  final String locale = _getLocale();
-
-  @override
-  final int numberOfProcessors = _numberOfProcessors();
 
   static OperatingSystem _getOS() {
     if (_isKnownEnvironment) {
@@ -72,4 +61,19 @@ final class _HostPlatform$IO extends HostPlatform {
     }
     return lang;
   }
+
+  @override
+  final HostPlatformType type = const HostPlatformType.vm();
+
+  @override
+  final OperatingSystem operatingSystem;
+
+  @override
+  final String version;
+
+  @override
+  final String locale;
+
+  @override
+  final int numberOfProcessors;
 }

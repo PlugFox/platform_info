@@ -8,9 +8,7 @@ import 'default_host_platform.dart';
 import 'enums.dart';
 import 'methods.dart';
 import 'stub_host_platform.dart'
-    // ignore: uri_does_not_exist
     if (dart.library.js_interop) 'js_host_platform.dart'
-    // ignore: uri_does_not_exist
     if (dart.library.io) 'vm_host_platform.dart';
 
 /// [Platform] info
@@ -52,8 +50,6 @@ import 'stub_host_platform.dart'
 ///
 @immutable
 final class Platform extends ExtendedHostPlatform with PlatformMethods {
-  static HostPlatform _getHostPlatform() => getHostPlatform();
-
   /// Access to the Singleton instance of Platform
   static Platform get instance => _this;
 
@@ -63,7 +59,8 @@ final class Platform extends ExtendedHostPlatform with PlatformMethods {
   /// Singleton info about platform
   static final Platform _this = Platform._internalFactoryFromEnvironment();
 
-  static BuildMode _getCurrentBuildMode() => () {
+  /// Get current build mode
+  static BuildMode _$getCurrentBuildMode() => () {
         if (const bool.fromEnvironment('dart.vm.product')) {
           return const BuildMode.release();
         }
@@ -75,10 +72,19 @@ final class Platform extends ExtendedHostPlatform with PlatformMethods {
         return result;
       }();
 
+  /// Get host platform
+  static HostPlatform _$getHostPlatform() {
+    try {
+      return getHostPlatform();
+    } on Object {
+      return const DefaultHostPlatform();
+    }
+  }
+
   /// Internal factory from environment
   factory Platform._internalFactoryFromEnvironment() => Platform._internal(
-        buildMode: _getCurrentBuildMode(),
-        hostPlatform: _getHostPlatform(),
+        buildMode: _$getCurrentBuildMode(),
+        hostPlatform: _$getHostPlatform(),
       );
 
   /// Internal constructor
